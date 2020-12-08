@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import Header from '../header';
 import Footer from '../footer';
+import { connect } from 'react-redux';
 import Sidebar from '../sidebar';
 import Mainbody from '../mainBody';
-function Layout() {
+function Layout(props) {
+	console.log(props.state)
 	const [ show, setShow ] = useState(true);
 	return (
 		<div>
 			<Header />
-			<button onClick={() => setShow((show) => !show)}>Show</button>
 			<div className="grid_container">
-				{show ? <Sidebar /> : ''}
+				{props.state ? <Sidebar /> : ''}
 				<Mainbody />
 			</div>
 			<Footer />
@@ -18,4 +19,10 @@ function Layout() {
 	);
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+	return {
+		state: state.sidebar.isShow
+	};
+};
+
+export default connect(mapStateToProps, null)(Layout);
