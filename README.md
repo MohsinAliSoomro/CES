@@ -30,7 +30,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-Dependencies
+## Dependencies
 ```bash
     npm i redux-devtools-extension
     npm i evergreen-ui
@@ -41,8 +41,8 @@ Dependencies
     npm i style-component
 ```
 
-#### Fonts 
+## Fonts 
 Convergence from google font
 
-#### Illustration use from 
+## Illustration use from 
 https://icons8.com/
