@@ -28,3 +28,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+Dependencies
+```bash
+    npm i redux-devtools-extension
+    npm i evergreen-ui
+    npm i react-icons
+    npm i redux-thunk
+    npm i redux
+    npm i react-redux
+    npm i style-component
+```
+
+Initial Student dashboard
+
+![alt text](C:\Users\kkc\Desktop\fyp gif\structure.gif?raw=true "Structure")

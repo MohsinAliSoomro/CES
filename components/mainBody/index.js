@@ -2,7 +2,7 @@ import React from 'react'
 
 function index() {
     return (
-        <div>
+        <div style={{height:'100vh'}}>
             Body
         </div>
     )
