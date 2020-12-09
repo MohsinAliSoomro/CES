@@ -7,14 +7,12 @@
     
   }
   .sidebar-nav{
-    font-size: 20px;
+    font-size: 18px;
     height: 100vh;
-    box-shadow:  3px 2px grey;
   }
   .sidebar-nav > div {
-    padding: 15px 8px;
+    padding: 2px 8px;
     margin-bottom: 5px;
-    box-shadow: 0px 0px 3px 2px rgb(241, 241, 241);
   }
   .nav-btn{
     background-color:white;

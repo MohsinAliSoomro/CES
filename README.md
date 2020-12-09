@@ -41,6 +41,8 @@ Dependencies
     npm i style-component
 ```
 
-Initial Student dashboard
+#### Fonts 
+Convergence from google font
 
-![alt text](C:\Users\kkc\Desktop\fyp gif\structure.gif?raw=true "Structure")
+#### Illustration use from 
+https://icons8.com/
