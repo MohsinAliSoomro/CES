@@ -12,7 +12,7 @@ export default function Home() {
 			</Head>
 			<main>
 				<Layout />
-				<h1>Netlify added</h1>
+				
 			</main>
 		</div>
 	);
