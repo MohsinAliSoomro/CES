@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import sidebarReducer from './slidebar/sidebar'
+import sidebarReducer from '../components/sidebar/sidebarSlice';
 
 export default configureStore({
 	reducer: {
-		toggle: sidebarReducer,
+		toggle: sidebarReducer
 	}
 });
-
- 

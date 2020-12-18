@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const sidebarSlice = createSlice({
 	name: 'toggle',
 	initialState: {
-		isShow: false,
+		isShow: false
 	},
 	reducers: {
 		show: (state) => {
@@ -12,11 +12,9 @@ const sidebarSlice = createSlice({
 		hide: (state) => {
 			state.isShow = false;
 		}
-	},
+	}
 });
-
+//export actions
 export const { show, hide } = sidebarSlice.actions;
-
-export const selectShow = state => state.toggle.isShow;
-
+//export reducer 
 export default sidebarSlice.reducer;

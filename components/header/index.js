@@ -1,8 +1,8 @@
 
 import { AiOutlineBars } from 'react-icons/ai';
-import { hide, show } from '../../redux/slidebar/sidebar'
+import { hide, show } from '../sidebar/sidebarSlice'
 import { useDispatch,useSelector} from 'react-redux'
-function index(props) {
+function index() {
 	const isShow= useSelector((state)=>state.toggle.isShow)
 	const dispatch = useDispatch();
 	return (
