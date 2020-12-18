@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 function index() {
 	return (
 		<div

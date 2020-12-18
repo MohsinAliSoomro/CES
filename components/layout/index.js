@@ -6,7 +6,6 @@ import Sidebar from '../sidebar';
 import Mainbody from '../mainBody';
 function Layout(props) {
 	console.log(props.state)
-	const [ show, setShow ] = useState(true);
 	return (
 		<div>
 			<Header />
