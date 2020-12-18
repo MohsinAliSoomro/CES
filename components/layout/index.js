@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
 import Header from '../header';
 import Footer from '../footer';
-import { connect } from 'react-redux';
-import Sidebar from '../sidebar';
 import Mainbody from '../mainBody';
-function Layout(props) {
-	console.log(props.state)
+import { useSelector } from 'react-redux';
+import Sidebar from '../sidebar';
+// import { selectShow } from '../../redux/slidebar/sidebar';
+function Layout() {
+	const isOpn = useSelector((state)=>state.toggle.isShow);
+
+	console.log(isOpn);
 	return (
 		<div>
 			<Header />
 			<div className="grid_container">
-				{props.state ? <Sidebar /> : ''}
+				{isOpn ? <Sidebar /> : ''} 
 				<Mainbody />
 			</div>
 			<Footer />
@@ -18,10 +20,4 @@ function Layout(props) {
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		state: state.sidebar.isShow
-	};
-};
-
-export default connect(mapStateToProps, null)(Layout);
+export default Layout;

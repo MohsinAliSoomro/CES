@@ -1,15 +1,18 @@
-import { connect } from 'react-redux';
-import { ShowSidebar, HideSidebar } from '../../redux/slidebar/action';
+
 import { AiOutlineBars } from 'react-icons/ai';
+import { hide, show } from '../../redux/slidebar/sidebar'
+import { useDispatch,useSelector} from 'react-redux'
 function index(props) {
+	const isShow= useSelector((state)=>state.toggle.isShow)
+	const dispatch = useDispatch();
 	return (
 		<div style={{ display: 'flex', justifyContent: 'space-between', boxShadow: '0px 0px 3px 2px grey' }}>
-			{props.state ? (
-				<button className="nav-btn" onClick={() => props.hide()}>
+			{isShow ? (
+				<button className="nav-btn" onClick={() => dispatch(hide())}>
 					<AiOutlineBars size={30} />
 				</button>
 			) : (
-				<button className="nav-btn" onClick={() => props.show()}>
+				<button className="nav-btn" onClick={() => dispatch(show())}>
 					<AiOutlineBars size={30} />
 				</button>
 			)}
@@ -19,17 +22,4 @@ function index(props) {
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		state: state.sidebar.isShow
-	};
-};
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		show: () => dispatch(ShowSidebar()),
-		hide: () => dispatch(HideSidebar())
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(index);
+export default index
