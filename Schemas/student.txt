@@ -1,0 +1,15 @@
+https://bezkoder.com/mongodb-many-to-many-mongoose/
+
+Properties
+
+Roll NO
+FirstName
+Lastname
+Caste
+programID
+FatherName
+Religion
+Nationality
+Photo_URL
+Address
+
