@@ -1,0 +1,29 @@
+
+
+
+/Std
+
+
+Student
+	GET(ID)
+	UPDATE(ID)
+	DEL(ID)
+
+
+DEPT
+
+	GET(ID)
+	UPDATE(ID)
+	DEL(ID)
+
+
+PROGRAM
+	DET(ID)
+	UPDATE(ID)
+	DEL(ID)
+
+
+
+
+
+
