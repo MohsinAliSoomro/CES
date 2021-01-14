@@ -5,14 +5,19 @@ https://dev.to/taylorbeeston/you-probably-don-t-need-body-parser-in-your-express
 
 Properties
 
-Roll NO
-FirstName
-Lastname
-Caste
-programID
-FatherName
-Religion
-Nationality
-Photo_URL
-Address
+Roll NO   17-bscs-10; (9:15)
+
+FirstName (3:20)
+Lastname (3:20)
+Caste (3:20)
+programID 
+FatherName (3:20)
+Religion (3:10)
+gender
+DateofBirth
+Nationality (3:20)
+Photo_URL 
+Address (20:300);
+City
+
 

@@ -5,19 +5,18 @@
 
 
 Student
+	POST
 	GET(ID)
 	UPDATE(ID)
 	DEL(ID)
-
-
 DEPT
-
+	POST
 	GET(ID)
 	UPDATE(ID)
 	DEL(ID)
-
 
 PROGRAM
+	POST
 	DET(ID)
 	UPDATE(ID)
 	DEL(ID)
