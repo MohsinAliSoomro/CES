@@ -3,6 +3,7 @@ const Dept = db.dept;
 
 // Create and Save a new Department
 exports.create = (req, res) => {
+
   // Validate request
   if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
@@ -10,11 +11,7 @@ exports.create = (req, res) => {
   }
 
   // Create a Department
-  const dept = new Dept({
-    title: req.body.title,
-    description: req.body.description,
-    statusflag:true
-  });
+  const dept = new Dept(req.body);
 
   // Save Department in the database
   dept
@@ -99,7 +96,7 @@ exports.delete = (req, res) => {
       .then(data => {
         if (!data) {
           res.status(404).send({
-            message: `Cannot delete Department with id=${id}. Maybe Tutorial was not found!`
+            message: `Cannot delete Department with id=${id}. Maybe Department was not found!`
           });
         } else {
           res.send({

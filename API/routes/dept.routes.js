@@ -15,5 +15,5 @@ module.exports = app => {
     // Update a Tutorial with id
     router.put("/:id", dept.update);
   
-    app.use('/api/dept', router);
+    app.use('/dept', router);
   };
