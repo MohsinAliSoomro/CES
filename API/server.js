@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/dept.routes")(app);
+require("./routes/prog.routes")(app);
 
 
 const PORT = process.env.PORT || 3001;

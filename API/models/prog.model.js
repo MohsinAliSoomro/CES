@@ -3,7 +3,8 @@ module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
       title: String,
-      description: String
+      description: String,
+  
     },
     { timestamps: true }
   );
@@ -16,6 +17,6 @@ module.exports = (mongoose) => {
   });
 
 
-  const Dept = mongoose.model("dept", schema);
-  return Dept;
+  const Prog = mongoose.model("prog", schema);
+  return Prog;
 };
