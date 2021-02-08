@@ -3,9 +3,15 @@ module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
       title: String,
-      description: String
+      description: String,
+      programme: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Prog"
+        }
+      ]
     },
-    { timestamps: true }
+    // { timestamps: true }
   );
 
 
@@ -16,6 +22,6 @@ module.exports = (mongoose) => {
   });
 
 
-  const Dept = mongoose.model("dept", schema);
+  const Dept = mongoose.model("Dept", schema);
   return Dept;
 };

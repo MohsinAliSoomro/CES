@@ -4,9 +4,12 @@ module.exports = (mongoose) => {
     {
       title: String,
       description: String,
-  
+      Dept: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Dept"
+      }
     },
-    { timestamps: true }
+    // { timestamps: true }
   );
 
 
@@ -17,6 +20,6 @@ module.exports = (mongoose) => {
   });
 
 
-  const Prog = mongoose.model("prog", schema);
+  const Prog = mongoose.model("Prog", schema);
   return Prog;
 };

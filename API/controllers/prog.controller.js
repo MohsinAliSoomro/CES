@@ -33,8 +33,9 @@ exports.findAll = (req, res) => {
   var condition = title
     ? { title: { $regex: new RegExp(title), $options: "i" } }
     : {};
+  console.log(condition);
 
-    Prog.find(condition)
+    Prog.find(condition).populate("Dept", "-_id -__v")
     .then((data) => {
       res.send(data);
     })
