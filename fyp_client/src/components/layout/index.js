@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './style.scss';
+import {Link} from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import {
 	MenuUnfoldOutlined,
@@ -25,10 +26,10 @@ const MainLayout = ({ children }) => {
 				<div className="logo" />
 				<Menu theme="dark" mode="inline" defaultSelectedKeys={[ '1' ]}>
 					<Menu.Item key="1" icon={<UserOutlined />}>
-						nav 1
+						<Link to="/">Home</Link>
 					</Menu.Item>
 					<Menu.Item key="2" icon={<VideoCameraOutlined />}>
-						nav 2
+					<Link to="/print">Print</Link>
 					</Menu.Item>
 					<Menu.Item key="3" icon={<UploadOutlined />}>
 						nav 3
