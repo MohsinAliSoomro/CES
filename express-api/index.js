@@ -6,10 +6,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const PORT = process.env.PORT | 5000;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
+
 mongoose.connect(
 	'mongodb://localhost:27017/testDB',
 	{
@@ -22,6 +24,7 @@ mongoose.connect(
 var companies = require('./controller/companies.controller.js');
 
 app.get('/api/companies/init', companies.init);
+
 app.get('/api/companies', companies.findAll);
 
 var products = require('./controller/products.controller.js');
