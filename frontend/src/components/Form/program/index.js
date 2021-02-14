@@ -1,5 +1,6 @@
-import { Form, Input } from 'antd';
+import { Form, Input,Select } from 'antd';
 import { Button, Col } from 'reactstrap';
+const { Option } = Select;
 const layout = {
 	labelCol: {
 		span: 24
@@ -15,7 +16,7 @@ const tailLayout = {
 	}
 };
 
-const DepartmentForm = () => {
+const ProgramForm = () => {
 	const onFinish = (values) => {
 		console.log('Success:', values);
 	};
@@ -29,25 +30,37 @@ const DepartmentForm = () => {
 			{...layout}
 			style={{ padding: '10px 20px' }}
 			name="basic"
-			initialValues={{
-				remember: true
-			}}
 			onFinish={onFinish}
 			onFinishFailed={onFinishFailed}
 		>
 			<Form.Item
-				label="Department"
-				name="Department"
+				label="Program"
+				name="Program"
 				rules={[
 					{
 						required: true,
-						message: 'Please input your Department!'
+						message: 'Please input your Program!'
 					}
 				]}
 			>
 				<Input />
 			</Form.Item>
-
+            <Form.Item
+				label="Department"
+				name="Department"
+				rules={[
+					{
+						required: true,
+					}
+				]}
+			>
+                <Select placeholder="Select the department" allowClear>
+                    <Option value='cs'>CS</Option>
+                    <Option value='bba'>BBA</Option>
+                    <Option value='math'>MATH</Option>
+                    <Option value='commerce'>COMMERCE</Option>
+                </Select>
+			</Form.Item>
 			<Form.Item {...tailLayout}>
 				<Col className="text-right" xs="4">
 					<Button color="primary" href="#pablo" size="md">
@@ -59,4 +72,4 @@ const DepartmentForm = () => {
 	);
 };
 
-export default DepartmentForm;
+export default ProgramForm;

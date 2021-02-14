@@ -19,7 +19,7 @@ import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
-import Tables from "views/examples/Tables.js";
+import Program from "views/examples/Program.js";
 
 var routes = [
   {
@@ -37,10 +37,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
+    path: "/program",
     name: "Program",
     icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
+    component: Program,
     layout: "/admin",
   },
   {

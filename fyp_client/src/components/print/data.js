@@ -78,7 +78,7 @@ export class ComponentToPrint extends React.PureComponent {
 							<td>Course </td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>C</td>
@@ -86,21 +86,21 @@ export class ComponentToPrint extends React.PureComponent {
 							<td rowSpan="5">Fails</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>C</td>
 							<td>2.0</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>Fail</td>
 							<td>2.0</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>Fail</td>
@@ -123,7 +123,7 @@ export class ComponentToPrint extends React.PureComponent {
 						</tr>
 
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>C</td>
@@ -131,35 +131,35 @@ export class ComponentToPrint extends React.PureComponent {
 							<td rowSpan="5">Fails</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>C</td>
 							<td>2.0</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>Fail</td>
 							<td>2.0</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Artificial Intelligence </td>
+							<td style={{ fontWeight: 'bolder' }}>Artificial Intelligence </td>
 							<td>3</td>
 							<td>60</td>
 							<td>Fail</td>
 							<td>2.0</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Total Marks (b) </td>
+							<td style={{ fontWeight: 'bolder' }}>Total Marks (b) </td>
 							<td>12</td>
 							<td>250</td>
 							<td>GPA</td>
 							<td>2.19</td>
 						</tr>
 						<tr>
-							<td style={{fontWeight:'bolder'}}>Total Marks (a) + (b) </td>
+							<td style={{ fontWeight: 'bolder' }}>Total Marks (a) + (b) </td>
 							<td>24</td>
 							<td>372</td>
 							<td>CGPA</td>

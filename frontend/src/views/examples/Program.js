@@ -1,6 +1,7 @@
 
 import React from "react";
-import DepartmentForm from '../../components/form/dep'
+import DepartmentForm from '../../components/Form/dep';
+import styles from './Program.module.css';
 // reactstrap components
 import {
   Badge,
@@ -23,8 +24,9 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import ProgramForm from "components/Form/program";
 
-const Tables = () => {
+const Program = () => {
   return (
     <>
       <Header />
@@ -34,15 +36,15 @@ const Tables = () => {
         {/* Table */}
         <div className="row">
         <div className="col-sm-12 col-lg-6 col-md-6 mb-3">
-          <div className=" shadow" style={{backgroundColor:"white",borderRadius:"4px"}}>
-            <h3>Deparment</h3>
+          <div className=" shadow" style={{backgroundColor:"white",borderRadius:"6px"}}>
+            <h2 className={styles.formHeading}>Department</h2>
           <DepartmentForm />
           </div>
         </div>
         <div className="col-sm-12 col-lg-6 col-md-6 mb-3">
-        <div className=" shadow" style={{backgroundColor:"white",borderRadius:"4px"}}>
-            <h3>Deparment</h3>
-          <DepartmentForm />
+        <div className=" shadow" style={{backgroundColor:"white",borderRadius:"6px"}}>
+            <h2 className={styles.formHeading}>Program</h2>
+          <ProgramForm />
           </div>
         </div>
       </div>
@@ -1795,4 +1797,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default Program;
