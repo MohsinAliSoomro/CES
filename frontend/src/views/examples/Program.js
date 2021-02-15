@@ -20,12 +20,13 @@ import {
 	Container,
 	Row
 } from 'reactstrap';
+import {ToastProvider} from 'react-toast-notifications'
 // core components
 import Header from 'components/Headers/Header.js';
 import ProgramForm from 'components/Form/program';
 
 const Program = () => {
-	console.log('Program', program);
+	
 	return (
 		<React.Fragment>
 			<Header />
@@ -37,13 +38,18 @@ const Program = () => {
 					<div className="col-sm-12 col-lg-6 col-md-6 mb-3">
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
 							<h2 className={styles.formHeading}>Department</h2>
+							<ToastProvider>
 							<DepartmentForm />
+							</ToastProvider>
+							
 						</div>
 					</div>
 					<div className="col-sm-12 col-lg-6 col-md-6 mb-3">
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
 							<h2 className={styles.formHeading}>Program</h2>
-							<ProgramForm />
+							<ToastProvider>
+								<ProgramForm />
+								</ToastProvider>
 						</div>
 					</div>
 				</div>

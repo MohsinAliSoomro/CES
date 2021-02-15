@@ -46,9 +46,11 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.2",
     "antd": "^4.12.3",
+    "axios": "^0.21.1",
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",
     "classnames": "2.2.6",
+    "dotenv": "^8.2.0",
     "moment": "2.29.1",
     "node-sass": "4.14.1",
     "node-sass-package-importer": "5.3.2",
@@ -60,6 +62,7 @@
     "react-dom": "17.0.1",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.1",
+    "react-toast-notifications": "^2.4.3",
     "reactstrap": "8.9.0"
   },
   "devDependencies": {

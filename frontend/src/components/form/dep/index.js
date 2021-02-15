@@ -1,5 +1,7 @@
 import { Form, Input } from 'antd';
 import { Button, Col } from 'reactstrap';
+import { useToasts } from 'react-toast-notifications';
+import { CreateDepartment } from '../../../functions/department';
 const layout = {
 	labelCol: {
 		span: 24
@@ -16,12 +18,22 @@ const tailLayout = {
 };
 
 const DepartmentForm = () => {
+	const { addToast } = useToasts();
 	const onFinish = (values) => {
 		console.log('Success:', values);
-	};
-
-	const onFinishFailed = (errorInfo) => {
-		console.log('Failed:', errorInfo);
+		CreateDepartment({ name: values.Department })
+			.then((res) => {
+				addToast(`${values.Department} Added successfully...`, {
+					appearance: 'success',
+					autoDismiss: true
+				});
+			})
+			.catch((err) => {
+				addToast(`Something Errors check connecting`, {
+					appearance: 'error',
+					autoDismiss: true
+				});
+			});
 	};
 
 	return (
@@ -33,7 +45,6 @@ const DepartmentForm = () => {
 				remember: true
 			}}
 			onFinish={onFinish}
-			onFinishFailed={onFinishFailed}
 		>
 			<Form.Item
 				label="Department"
@@ -50,7 +61,7 @@ const DepartmentForm = () => {
 
 			<Form.Item {...tailLayout}>
 				<Col className="text-right" xs="4">
-					<Button color="primary" href="#pablo" size="md">
+					<Button color="primary" size="md">
 						Save
 					</Button>
 				</Col>
