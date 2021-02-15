@@ -1,0 +1,10 @@
+{
+	"program": [
+		{ "id": "1", "name": "IT","status":"active", "department": "CS", "student": "121" },
+		{ "id": "2", "name": "CS","status":"active", "department": "CS", "student": "123" },
+		{ "id": "3", "name": "BBA","status":"active", "department": "BBA", "student": "312" },
+		{ "id": "4", "name": "Commerce","status":"disable", "department": "Commerce", "student": "423" },
+    { "id": "5", "name": "ENG","status":"active", "department": "ENG", "student": "612" },
+		{ "id": "6", "name": "MATH","status":"disable", "department": "MATH", "student": "463" }
+	]
+}
