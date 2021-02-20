@@ -1,0 +1,19 @@
+const mongoose = require('mongoose');
+
+const SubjectSchema = mongoose.Schema({
+	name: {
+		type: String,
+		required: true
+	},
+	semesterId: {
+		ref: 'semester',
+		type: mongoose.Schema.Types.ObjectId
+	},
+	type: {
+		type: String,
+		enum: [ 'Theory', 'Practical' ],
+		default: 'Theory'
+	}
+});
+
+module.exports = mongoose.model('subject', SubjectSchema);

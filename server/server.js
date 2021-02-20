@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 const DatabaseConnection = require('./config/mongodb.js');
-const cors = require('cors')
+const cors = require('cors');
 //Environment Variable
 require('dotenv').config();
-app.use(cors())
+app.use(cors());
 //database connection
 DatabaseConnection();
 app.use(express.json());
@@ -24,6 +24,9 @@ app.use('/student', student);
 //student routes
 const semester = require('./routes/semester');
 app.use('/semester', semester);
+//student routes
+const subject = require('./routes/subject');
+app.use('/subject', subject);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Server Running on Port ${process.env.PORT} `);
