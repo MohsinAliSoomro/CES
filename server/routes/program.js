@@ -4,6 +4,6 @@ const {pro} = require('../controllers/programs/index.js')
 
 
 router.post('/create', pro.CreateProgram)
-router.get('/list', pro.ListProgram)
+router.get('/programs', pro.ListProgram)
 
 module.exports = router;    

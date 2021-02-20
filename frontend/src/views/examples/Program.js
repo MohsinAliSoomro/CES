@@ -1,5 +1,5 @@
 import React from 'react';
-import DepartmentForm from '../../components/Form/Dep';
+import DepartmentForm from '../../components/Form/dep';
 import styles from './Program.module.css';
 // reactstrap components
 import program from '../../json/program.json';
@@ -20,13 +20,12 @@ import {
 	Container,
 	Row
 } from 'reactstrap';
-import {ToastProvider} from 'react-toast-notifications'
+import { ToastProvider } from 'react-toast-notifications';
 // core components
 import Header from 'components/Headers/Header.js';
-import ProgramForm from 'components/Form/Program';
+import ProgramForm from 'components/Form/program';
 
 const Program = () => {
-	
 	return (
 		<React.Fragment>
 			<Header />
@@ -39,9 +38,8 @@ const Program = () => {
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
 							<h2 className={styles.formHeading}>Department</h2>
 							<ToastProvider>
-							<DepartmentForm />
+								<DepartmentForm />
 							</ToastProvider>
-							
 						</div>
 					</div>
 					<div className="col-sm-12 col-lg-6 col-md-6 mb-3">
@@ -49,7 +47,7 @@ const Program = () => {
 							<h2 className={styles.formHeading}>Program</h2>
 							<ToastProvider>
 								<ProgramForm />
-								</ToastProvider>
+							</ToastProvider>
 						</div>
 					</div>
 				</div>
