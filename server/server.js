@@ -21,6 +21,9 @@ app.use('/program', program);
 //student routes
 const student = require('./routes/student');
 app.use('/student', student);
+//student routes
+const semester = require('./routes/semester');
+app.use('/semester', semester);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Server Running on Port ${process.env.PORT} `);
