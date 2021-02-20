@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Col } from 'reactstrap';
 import { ListDepartment } from '../../../functions/department';
 import { CreateProgram } from '../../../functions/program';
-import {useToasts} from 'react-toast-notifications'
+import { useToasts } from 'react-toast-notifications';
 const { Option } = Select;
 const layout = {
 	labelCol: {
@@ -21,7 +21,7 @@ const tailLayout = {
 };
 
 const ProgramForm = () => {
-	const {addToast } = useToasts();
+	const { addToast } = useToasts();
 	const [ dep, setDep ] = useState([]);
 	useEffect(() => {
 		let mounted = true;
@@ -36,32 +36,25 @@ const ProgramForm = () => {
 			mounted = false;
 		};
 	}, []);
-	
+
 	const onFinish = (values) => {
-	
-		CreateProgram({ name: values.Program, department: values.Department }).then((res) => {
-			addToast(`${values.Program} Added successfully...`, {
-				appearance: 'success',
-				autoDismiss: true
+		CreateProgram({ name: values.Program, department: values.Department })
+			.then((res) => {
+				addToast(`${values.Program} Added successfully...`, {
+					appearance: 'success',
+					autoDismiss: true
+				});
+			})
+			.catch((err) => {
+				addToast(`Something Errors check connecting`, {
+					appearance: 'error',
+					autoDismiss: true
+				});
 			});
-		})
-		.catch((err) => {
-			addToast(`Something Errors check connecting`, {
-				appearance: 'error',
-				autoDismiss: true
-			});
-		});
 	};
 
-	
-
 	return (
-		<Form
-			{...layout}
-			style={{ padding: '10px 20px' }}
-			name="basic"
-			onFinish={onFinish}
-		>
+		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
 			<Form.Item
 				label="Program"
 				name="Program"
@@ -84,10 +77,8 @@ const ProgramForm = () => {
 				]}
 			>
 				<Select placeholder="Select the department" allowClear>
-					{dep.map(d => {
-						return (
-							<Option value={d._id}>{ d.name}</Option>
-						)
+					{dep.map((d) => {
+						return <Option value={d._id}>{d.name}</Option>;
 					})}
 				</Select>
 			</Form.Item>
