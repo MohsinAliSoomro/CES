@@ -1,5 +1,5 @@
 import React from 'react';
-import DepartmentForm from '../../components/Form/dep';
+import DepartmentForm from '../../components/Form/Dep';
 import styles from './Program.module.css';
 // reactstrap components
 import program from '../../json/program.json';
@@ -23,7 +23,7 @@ import {
 import {ToastProvider} from 'react-toast-notifications'
 // core components
 import Header from 'components/Headers/Header.js';
-import ProgramForm from 'components/Form/program';
+import ProgramForm from 'components/Form/Program';
 
 const Program = () => {
 	
