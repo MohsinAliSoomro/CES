@@ -29,7 +29,7 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
+                        <i className="fas fa-users" />
                         </div>
                       </Col>
                     </Row>
@@ -51,7 +51,7 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <i className="fas fa-chart-pie" />
+                        <i className="fas fa-users" />
                         </div>
                       </Col>
                     </Row>
@@ -73,7 +73,7 @@ const Header = () => {
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="fas fa-users" />
+                          <i className="fas fa-chart-bar" />
                         </div>
                       </Col>
                     </Row>
