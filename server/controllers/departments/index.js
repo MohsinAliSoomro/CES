@@ -7,7 +7,7 @@ exports.dep = {
 		res.send(newDep);
 	},
 	ListDepartment: async function(req, res) {
-		const listDep = await Department.find({});
+		const listDep = await Department.find({}).populate('programs',"name");
 		res.send(listDep);
 	}
 };
