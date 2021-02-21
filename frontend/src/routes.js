@@ -1,9 +1,9 @@
 import Index from "views/Index.js";
-import Profile from "views/examples/Profile.js";
-import Register from "views/examples/Register.js";
-import Login from "views/examples/Login.js";
-import Program from "views/examples/Program.js";
-import Semester from "views/examples/Semester.js";
+import Profile from "views/Profile.js";
+import Register from "views/Register.js";
+import Login from "views/Login.js";
+import Program from "views/Program.js";
+import Semester from "views/Semester.js";
 
 var routes = [
   {

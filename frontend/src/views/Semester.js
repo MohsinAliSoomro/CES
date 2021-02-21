@@ -1,5 +1,5 @@
 import React from 'react';
-import SemesterForm from '../../components/Form/semester';
+import SemesterForm from '../components/Form/semester';
 import styles from './Program.module.css';
 // reactstrap components
 import {

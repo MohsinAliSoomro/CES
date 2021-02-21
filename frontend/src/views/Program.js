@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import DepartmentForm from '../../components/Form/dep';
+import DepartmentForm from '../components/Form/dep';
 import styles from './Program.module.css';
-import {ListProgram} from '../../functions/program'
+import {ListProgram} from '../functions/program'
 // reactstrap components
-import program from '../../json/program.json';
+import program from '../json/program.json';
 import {
 	Badge,
 	Card,
@@ -90,7 +90,7 @@ const Program = () => {
 															<img
 																alt="..."
 																src={
-																	require('../../assets/img/theme/bootstrap.jpg')
+																	require('../assets/img/theme/bootstrap.jpg')
 																		.default
 																}
 															/>
