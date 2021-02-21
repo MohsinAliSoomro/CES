@@ -95,7 +95,6 @@ const Login = () => {
               href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
-              {/* <small>Create new account</small> */}
             </a>
           </Col>
         </Row>
