@@ -17,7 +17,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              CES
+              CES (Computerized Exam System)
             </a>
           </div>
         </Col>

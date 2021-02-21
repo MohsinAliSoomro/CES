@@ -18,7 +18,7 @@ const Login = () => {
                   href="#"
                   target="_blank"
                 >
-                  CES
+                  CES (Computerized Exam System)
                 </a>
               </div>
             </Col>
