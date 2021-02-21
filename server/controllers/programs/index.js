@@ -7,7 +7,7 @@ exports.pro = {
 		await Department.findByIdAndUpdate(
 			{ _id: newProgram.department },
 			{
-				$set: {
+				$push: {
 					programs: newProgram._id
 				}
 			}

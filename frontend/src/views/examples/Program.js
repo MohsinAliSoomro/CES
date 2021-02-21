@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DepartmentForm from '../../components/Form/dep';
 import styles from './Program.module.css';
+import {ListProgram} from '../../functions/program'
 // reactstrap components
 import program from '../../json/program.json';
 import {
@@ -26,6 +27,13 @@ import Header from 'components/Headers/Header.js';
 import ProgramForm from 'components/Form/program';
 
 const Program = () => {
+	const [programs,setPrograms] = useState([])
+	useEffect(() => {
+		ListProgram().then(res => {
+			setPrograms(res.data)
+			
+		})
+	},[])
 	return (
 		<React.Fragment>
 			<Header />
@@ -69,9 +77,9 @@ const Program = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{program.program.map((pro) => {
+									{!programs ? <div>Loading....</div> : programs.map((pro) => {
 										return (
-											<tr>
+											<tr key={pro._id}>
 												<th scope="row">
 													<Media className="align-items-center">
 														<a
@@ -92,18 +100,18 @@ const Program = () => {
 														</Media>
 													</Media>
 												</th>
-												<td>{pro.department}</td>
+												<td>{pro.department.name}</td>
 												<td>
 													<Badge color="" className="badge-dot mr-4">
 														<i
 															className={
-																pro.status === 'active' ? 'bg-success' : 'bg-warning'
+																 'bg-success' 
 															}
 														/>
-														{pro.status}
+														active
 													</Badge>
 												</td>
-												<td>{pro.student}</td>
+												<td>121</td>
 												<td className="text-right">
 													<UncontrolledDropdown>
 														<DropdownToggle

@@ -78,7 +78,7 @@ const ProgramForm = () => {
 			>
 				<Select placeholder="Select the department" allowClear>
 					{dep.map((d) => {
-						return <Option value={d._id}>{d.name}</Option>;
+						return <Option key={d._id} value={d._id}>{d.name}</Option>;
 					})}
 				</Select>
 			</Form.Item>

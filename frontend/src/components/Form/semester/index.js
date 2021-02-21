@@ -1,7 +1,11 @@
-import { Form, Input } from 'antd';
+import { Form, Input, Select } from 'antd';
 import { Button, Col } from 'reactstrap';
 import { useToasts } from 'react-toast-notifications';
 import { CreateSemester } from '../../../functions/semester';
+import { ListProgram } from '../../../functions//program';
+import { useEffect, useState } from 'react';
+
+const { Option } = Select;
 const layout = {
 	labelCol: {
 		span: 24
@@ -18,10 +22,14 @@ const tailLayout = {
 };
 
 const Semester = () => {
+	const [ program, setProgram ] = useState([]);
+	useEffect(() => {
+		ListProgram().then((res) => setProgram(res.data));
+	}, []);
 	const { addToast } = useToasts();
 	const onFinish = (values) => {
 		console.log('Success:', values);
-		CreateSemester({ name: values.Semester })
+		CreateSemester({ name: values.Semester,programId:values.Program }	)
 			.then((res) => {
 				addToast(`${values.Semester} Added successfully...`, {
 					appearance: 'success',
@@ -46,6 +54,26 @@ const Semester = () => {
 			}}
 			onFinish={onFinish}
 		>
+			<Form.Item
+				label="Program"
+				name="Program"
+				rules={[
+					{
+						required: true,
+						message: 'Please input your program!'
+					}
+				]}
+			>
+				<Select placeholder="Select the program" allowClear>
+					{program.map((d) => {
+						return (
+							<Option key={d._id} value={d._id}>
+								{d.name}
+							</Option>
+						);
+					})}
+				</Select>
+			</Form.Item>
 			<Form.Item
 				label="Semester"
 				name="Semester"

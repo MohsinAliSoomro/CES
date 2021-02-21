@@ -9,6 +9,9 @@ const SubjectSchema = mongoose.Schema({
 		ref: 'semester',
 		type: mongoose.Schema.Types.ObjectId
 	},
+	creditHour: {
+		type:Number
+	},
 	type: {
 		type: String,
 		enum: [ 'Theory', 'Practical' ],

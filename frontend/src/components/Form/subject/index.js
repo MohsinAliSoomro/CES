@@ -4,6 +4,8 @@ import { Button, Col } from 'reactstrap';
 import { ListSemester } from '../../../functions/semester';
 import { CreateSubject } from '../../../functions/subject';
 import { useToasts } from 'react-toast-notifications';
+import { ListProgram } from '../../../functions/program';
+import { SemesterProgram } from '../../../functions/semester';
 const { Option } = Select;
 const layout = {
 	labelCol: {
@@ -21,16 +23,14 @@ const tailLayout = {
 };
 
 const SubjectForm = () => {
+	const [ program, setProgram ] = useState([]);
+	const [ semester, setSemester ] = useState([]);
 	const { addToast } = useToasts();
 	const [ sub, setSub ] = useState([]);
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
-			ListSemester().then((res) => {
-				if (res.data) {
-					setSub(res.data);
-				}
-			});
+			ListProgram().then((res) => setProgram(res.data));
 		}
 		return () => {
 			mounted = false;
@@ -38,7 +38,12 @@ const SubjectForm = () => {
 	}, []);
 
 	const onFinish = (values) => {
-		CreateSubject({ name: values.Subject, semester: values.Semster })
+		CreateSubject({
+			name: values.Subject,
+			semester: values.Semester,
+			creditHour: Number(values.CreditHour),
+			type: values.Type
+		})
 			.then((res) => {
 				addToast(`${values.Subject} Added successfully...`, {
 					appearance: 'success',
@@ -51,10 +56,57 @@ const SubjectForm = () => {
 					autoDismiss: true
 				});
 			});
+		values.CreditHour = "3"
+		values.Subject = ""
+		values.Semester = ""
+		values.Type=""
 	};
-
+	const selectProgram = (value) => {
+		console.log(value);
+		SemesterProgram(value).then((res) => {
+			setSemester(res.data);
+			console.log(res.data);
+		});
+	};
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
+			<Form.Item
+				label="Program"
+				name="Program"
+				rules={[
+					{
+						required: true,
+						message: 'Please input your Program!'
+					}
+				]}
+			>
+				<Select placeholder="Select the program" onChange={selectProgram} allowClear>
+					{program.map((d) => {
+						return (
+							<Option key={d._id} value={d._id}>
+								{d.name}
+							</Option>
+						);
+					})}
+				</Select>
+			</Form.Item>
+
+			<Form.Item
+				label="Semester"
+				name="Semester"
+				rules={[
+					{
+						required: true
+					}
+				]}
+			>
+				<Select placeholder="Select the Semester" allowClear>
+					{semester.map((d) => {
+						return <Option value={d._id}>{d.name}</Option>;
+					})}
+				</Select>
+			</Form.Item>
+
 			<Form.Item
 				label="Subject"
 				name="Subject"
@@ -68,18 +120,33 @@ const SubjectForm = () => {
 				<Input />
 			</Form.Item>
 			<Form.Item
-				label="Semester"
-				name="Semester"
+				label="Type"
+				name="Type"
 				rules={[
 					{
-						required: true
+						required: true,
+						message: 'Please input subject Type!'
 					}
-				]}>
-				<Select placeholder="Select the Semester" allowClear>
-					{sub.map((d) => {
-						return <Option value={d._id}>{d.name}</Option>;
-					})}
+				]}
+			>
+				<Select placeholder="Select the Type" onChange={selectProgram} allowClear>
+					<Option value="Theory">Theory</Option>
+					<Option value="Practical">Practical</Option>
 				</Select>
+			</Form.Item>
+
+			<Form.Item
+				label="CreditHour"
+				name="CreditHour"
+				value="3"
+				rules={[
+					{
+						required: true,
+						message: 'Please input your CreditHour!'
+					}
+				]}
+			>
+				<Input />
 			</Form.Item>
 			<Form.Item {...tailLayout}>
 				<Col className="text-right" xs="4">
