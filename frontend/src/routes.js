@@ -3,6 +3,7 @@ import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Program from "views/examples/Program.js";
+import Semester from "views/examples/Semester.js";
 
 var routes = [
   {
@@ -24,6 +25,13 @@ var routes = [
     name: "Program",
     icon: "ni ni-bullet-list-67 text-red",
     component: Program,
+    layout: "/admin",
+  },
+    {
+    path: "/semester",
+    name: "Semester",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: Semester,
     layout: "/admin",
   },
   {
