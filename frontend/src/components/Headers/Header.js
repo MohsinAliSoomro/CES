@@ -1,10 +1,16 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
-
+import {ListStudent} from '../../functions/student'
 const Header = () => {
+  const [student,setStudent]=useState([])
+  useEffect(() => {
+    ListStudent().then(res => {
+      setStudent(res.data)
+    })
+  },[])
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -24,7 +30,7 @@ const Header = () => {
                         Students
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          70
+                          {student.length}
                         </span>
                       </div>
                       <Col className="col-auto">

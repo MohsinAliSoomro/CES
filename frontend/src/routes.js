@@ -4,7 +4,7 @@ import Register from "views/Register.js";
 import Login from "views/Login.js";
 import Program from "views/Program.js";
 import Semester from "views/Semester.js";
-
+import Student from 'views/Student.js'
 var routes = [
   {
     path: "/index",
@@ -32,6 +32,13 @@ var routes = [
     name: "Semester",
     icon: "ni ni-bullet-list-67 text-red",
     component: Semester,
+    layout: "/admin",
+  },
+  {
+    path: "/student",
+    name: "student",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: Student,
     layout: "/admin",
   },
   {

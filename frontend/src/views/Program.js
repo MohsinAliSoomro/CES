@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DepartmentForm from '../components/Form/dep';
 import styles from './Program.module.css';
-import {ListProgram} from '../functions/program'
+import { ListProgram } from '../functions/program';
 // reactstrap components
 import program from '../json/program.json';
 import {
@@ -27,13 +27,12 @@ import Header from 'components/Headers/Header.js';
 import ProgramForm from 'components/Form/program';
 
 const Program = () => {
-	const [programs,setPrograms] = useState([])
+	const [ programs, setPrograms ] = useState([]);
 	useEffect(() => {
-		ListProgram().then(res => {
-			setPrograms(res.data)
-			
-		})
-	},[])
+		ListProgram().then((res) => {
+			setPrograms(res.data);
+		});
+	}, []);
 	return (
 		<React.Fragment>
 			<Header />
@@ -77,119 +76,82 @@ const Program = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{!programs ? <div>Loading....</div> : programs.map((pro) => {
-										return (
-											<tr key={pro._id}>
-												<th scope="row">
-													<Media className="align-items-center">
-														<a
-															className="avatar rounded-circle mr-3"
-															href="#pablo"
-															onClick={(e) => e.preventDefault()}
-														>
-															<img
-																alt="..."
-																src={
-																	require('../assets/img/theme/bootstrap.jpg')
-																		.default
-																}
-															/>
-														</a>
-														<Media>
-															<span className="mb-0 text-sm">{pro.name}</span>
+									{!programs ? (
+										<div>Loading....</div>
+									) : (
+										programs.map((pro) => {
+											return (
+												<tr key={pro._id}>
+													<th scope="row">
+														<Media className="align-items-center">
+															<a
+																className="avatar rounded-circle mr-3"
+																href="#pablo"
+																onClick={(e) => e.preventDefault()}
+															>
+																<img
+																	alt="..."
+																	src={
+																		require('../assets/img/theme/bootstrap.jpg')
+																			.default
+																	}
+																/>
+															</a>
+															<Media>
+																<span className="mb-0 text-sm">{pro.name}</span>
+															</Media>
 														</Media>
-													</Media>
-												</th>
-												<td>{pro.department.name}</td>
-												<td>
-													<Badge color="" className="badge-dot mr-4">
-														<i
-															className={
-																 'bg-success' 
-															}
-														/>
-														active
-													</Badge>
-												</td>
-												<td>121</td>
-												<td className="text-right">
-													<UncontrolledDropdown>
-														<DropdownToggle
-															className="btn-icon-only text-light"
-															href="#pablo"
-															role="button"
-															size="sm"
-															color=""
-															onClick={(e) => e.preventDefault()}
-														>
-															<i className="fas fa-ellipsis-v" />
-														</DropdownToggle>
-														<DropdownMenu className="dropdown-menu-arrow" right>
-															<DropdownItem
+													</th>
+													<td>{pro.department.name}</td>
+													<td>
+														<Badge color="" className="badge-dot mr-4">
+															<i className={'bg-success'} />
+															active
+														</Badge>
+													</td>
+													<td>121</td>
+													<td className="text-right">
+														<UncontrolledDropdown>
+															<DropdownToggle
+																className="btn-icon-only text-light"
 																href="#pablo"
+																role="button"
+																size="sm"
+																color=""
 																onClick={(e) => e.preventDefault()}
 															>
-																Action
-															</DropdownItem>
-															<DropdownItem
-																href="#pablo"
-																onClick={(e) => e.preventDefault()}
-															>
-																Another action
-															</DropdownItem>
-															<DropdownItem
-																href="#pablo"
-																onClick={(e) => e.preventDefault()}
-															>
-																Something else here
-															</DropdownItem>
-														</DropdownMenu>
-													</UncontrolledDropdown>
-												</td>
-											</tr>
-										);
-									})}
+																<i className="fas fa-ellipsis-v" />
+															</DropdownToggle>
+															<DropdownMenu className="dropdown-menu-arrow" right>
+																<DropdownItem
+																	href="#pablo"
+																	onClick={(e) => e.preventDefault()}
+																>
+																	Action
+																</DropdownItem>
+																<DropdownItem
+																	href="#pablo"
+																	onClick={(e) => e.preventDefault()}
+																>
+																	Another action
+																</DropdownItem>
+																<DropdownItem
+																	href="#pablo"
+																	onClick={(e) => e.preventDefault()}
+																>
+																	Something else here
+																</DropdownItem>
+															</DropdownMenu>
+														</UncontrolledDropdown>
+													</td>
+												</tr>
+											);
+										})
+									)}
 								</tbody>
 							</Table>
 							<CardFooter className="py-4">
-								<nav aria-label="...">
-									<Pagination
-										className="pagination justify-content-end mb-0"
-										listClassName="justify-content-end mb-0"
-									>
-										<PaginationItem className="disabled">
-											<PaginationLink
-												href="#pablo"
-												onClick={(e) => e.preventDefault()}
-												tabIndex="-1"
-											>
-												<i className="fas fa-angle-left" />
-												<span className="sr-only">Previous</span>
-											</PaginationLink>
-										</PaginationItem>
-										<PaginationItem className="active">
-											<PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-												1
-											</PaginationLink>
-										</PaginationItem>
-										<PaginationItem>
-											<PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-												2 <span className="sr-only">(current)</span>
-											</PaginationLink>
-										</PaginationItem>
-										<PaginationItem>
-											<PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-												3
-											</PaginationLink>
-										</PaginationItem>
-										<PaginationItem>
-											<PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-												<i className="fas fa-angle-right" />
-												<span className="sr-only">Next</span>
-											</PaginationLink>
-										</PaginationItem>
-									</Pagination>
-								</nav>
+								<nav aria-label="..." />
 							</CardFooter>
 						</Card>
 					</div>
