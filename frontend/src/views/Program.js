@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import DepartmentForm from '../components/Form/dep';
 import styles from './Program.module.css';
 import { ListProgram } from '../functions/program';
+import { useSelector, useDispatch } from 'react-redux'
+import {fetchAllPrograms} from './programSlice'
 // reactstrap components
 import program from '../json/program.json';
 import {
@@ -27,11 +29,15 @@ import Header from 'components/Headers/Header.js';
 import ProgramForm from 'components/Form/program';
 
 const Program = () => {
+	const dispatch = useDispatch()
+	const program= useSelector(state=>state.program.programs)
 	const [ programs, setPrograms ] = useState([]);
 	useEffect(() => {
-		ListProgram().then((res) => {
-			setPrograms(res.data);
-		});
+		dispatch(fetchAllPrograms())
+		console.log("Programs", program.map(i=>i[0].name))
+		// ListProgram().then((res) => {
+		// 	setPrograms(res.data);
+		// });
 	}, []);
 	return (
 		<React.Fragment>
@@ -76,10 +82,10 @@ const Program = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{!programs ? (
+									{program.length===0 ? (
 										<div>Loading....</div>
 									) : (
-										programs.map((pro) => {
+										program[0].map((pro) => {
 											return (
 												<tr key={pro._id}>
 													<th scope="row">

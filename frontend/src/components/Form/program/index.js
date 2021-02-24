@@ -4,6 +4,8 @@ import { Button, Col } from 'reactstrap';
 import { ListDepartment } from '../../../functions/department';
 import { CreateProgram } from '../../../functions/program';
 import { useToasts } from 'react-toast-notifications';
+import { useDispatch } from 'react-redux'
+import {fetchAllPrograms} from '../../../views/programSlice'
 const { Option } = Select;
 const layout = {
 	labelCol: {
@@ -22,7 +24,8 @@ const tailLayout = {
 
 const ProgramForm = () => {
 	const { addToast } = useToasts();
-	const [ dep, setDep ] = useState([]);
+	const [dep, setDep] = useState([]);
+	const dispatch = useDispatch()
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
@@ -40,6 +43,7 @@ const ProgramForm = () => {
 	const onFinish = (values) => {
 		CreateProgram({ name: values.Program, department: values.Department })
 			.then((res) => {
+				dispatch(fetchAllPrograms())
 				addToast(`${values.Program} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true
