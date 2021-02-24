@@ -7,7 +7,10 @@ import { useToasts } from 'react-toast-notifications';
 import { ListProgram } from '../../../functions/program';
 import { SemesterProgram } from '../../../functions/semester';
 import { CreateStudent } from 'functions/student';
+import { fetchAllStudent } from '../../../views/studentSlice'
+import {useDispatch} from 'react-redux'
 const { Option } = Select;
+
 const layout = {
 	labelCol: {
 		span: 24
@@ -25,8 +28,9 @@ const tailLayout = {
 };
 
 const SubjectForm = () => {
+	const dispatch = useDispatch();
 	const [ program, setProgram ] = useState([]);
-	const [ semester, setSemester ] = useState([]);
+	const [semester, setSemester] = useState([]);
 	const { addToast } = useToasts();
 	const [sub, setSub] = useState([]);
 	const [selectPrgrm,setSelectProgram]=useState('')
@@ -53,6 +57,7 @@ const SubjectForm = () => {
 			district:values.district
 		})
 			.then((res) => {
+				dispatch(fetchAllStudent())
 				addToast(`${values.Subject} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true

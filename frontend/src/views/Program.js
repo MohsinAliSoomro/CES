@@ -31,13 +31,10 @@ import ProgramForm from 'components/Form/program';
 const Program = () => {
 	const dispatch = useDispatch()
 	const program= useSelector(state=>state.program.programs)
-	const [ programs, setPrograms ] = useState([]);
+
 	useEffect(() => {
 		dispatch(fetchAllPrograms())
-		console.log("Programs", program.map(i=>i[0].name))
-		// ListProgram().then((res) => {
-		// 	setPrograms(res.data);
-		// });
+
 	}, []);
 	return (
 		<React.Fragment>
