@@ -1,11 +1,10 @@
 import { Form, Input, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { Button, Col } from 'reactstrap';
-import { ListSemester } from '../../../functions/semester';
-import { CreateSubject } from '../../../functions/subject';
+
 import { useToasts } from 'react-toast-notifications';
 import { ListProgram } from '../../../functions/program';
-import { SemesterProgram } from '../../../functions/semester';
+// import { SemesterProgram } from '../../../functions/semester';
 import { CreateStudent } from 'functions/student';
 import { fetchAllStudent } from '../../../views/studentSlice'
 import {useDispatch} from 'react-redux'
@@ -30,9 +29,8 @@ const tailLayout = {
 const SubjectForm = () => {
 	const dispatch = useDispatch();
 	const [ program, setProgram ] = useState([]);
-	const [semester, setSemester] = useState([]);
+	// const [semester, setSemester] = useState([]);
 	const { addToast } = useToasts();
-	const [sub, setSub] = useState([]);
 	const [selectPrgrm,setSelectProgram]=useState('')
 	useEffect(() => {
 		let mounted = true;
@@ -77,10 +75,10 @@ const SubjectForm = () => {
 	const selectProgram = (value) => {
 		setSelectProgram(value)
 		console.log(value);
-		SemesterProgram(value).then((res) => {
-			setSemester(res.data);
-			console.log(res.data);	
-		});
+		// SemesterProgram(value).then((res) => {
+		// 	setSemester(res.data);
+		// 	console.log("semester=> ",res.data);	
+		// });
 	};
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>

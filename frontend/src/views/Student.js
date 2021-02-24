@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import StudentForm from '../components/Form/student';
 import styles from './Program.module.css';
-import { ListProgram } from '../functions/program';
-import { ListStudent } from '../functions/student';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllStudent } from './studentSlice';
 // reactstrap components
 
 import {
-	Badge,
 	Card,
 	CardHeader,
 	CardFooter,
@@ -17,9 +15,7 @@ import {
 	UncontrolledDropdown,
 	DropdownToggle,
 	Media,
-	Pagination,
-	PaginationItem,
-	PaginationLink,
+
 	Table,
 	Container,
 	Row
@@ -27,7 +23,7 @@ import {
 import { ToastProvider } from 'react-toast-notifications';
 // core components
 import Header from 'components/Headers/Header.js';
-import ProgramForm from 'components/Form/program';
+
 
 const Student = () => {
 	const dispatch = useDispatch();
@@ -35,8 +31,7 @@ const Student = () => {
 	useEffect(() => {
 		dispatch(fetchAllStudent());
 	
-	}, []);
-	console.log('Student=>', students);
+	}, [dispatch]);
 	return (
 		<React.Fragment>
 			<Header />

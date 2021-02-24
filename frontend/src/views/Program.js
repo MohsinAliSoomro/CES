@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import DepartmentForm from '../components/Form/dep';
 import styles from './Program.module.css';
-import { ListProgram } from '../functions/program';
-import { useSelector, useDispatch } from 'react-redux'
-import {fetchAllPrograms} from './programSlice'
-// reactstrap components
-import program from '../json/program.json';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAllPrograms } from './programSlice';
+
 import {
 	Badge,
 	Card,
@@ -16,9 +14,6 @@ import {
 	UncontrolledDropdown,
 	DropdownToggle,
 	Media,
-	Pagination,
-	PaginationItem,
-	PaginationLink,
 	Table,
 	Container,
 	Row
@@ -29,13 +24,15 @@ import Header from 'components/Headers/Header.js';
 import ProgramForm from 'components/Form/program';
 
 const Program = () => {
-	const dispatch = useDispatch()
-	const program= useSelector(state=>state.program.programs)
+	const dispatch = useDispatch();
+	const program = useSelector((state) => state.program.programs);
 
-	useEffect(() => {
-		dispatch(fetchAllPrograms())
-
-	}, []);
+	useEffect(
+		() => {
+			dispatch(fetchAllPrograms());
+		},
+		[ dispatch ]
+	);
 	return (
 		<React.Fragment>
 			<Header />
@@ -79,7 +76,7 @@ const Program = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{program.length===0 ? (
+									{program.length === 0 ? (
 										<div>Loading....</div>
 									) : (
 										program[0].map((pro) => {

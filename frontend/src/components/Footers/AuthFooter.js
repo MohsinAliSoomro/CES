@@ -13,13 +13,13 @@ const Login = () => {
             <Col xl="6">
               <div className="copyright text-center text-xl-left text-muted">
                 © {new Date().getFullYear()}{" "}
-                <a
+                <NavLink
                   className="font-weight-bold ml-1"
                   href="#"
                   target="_blank"
                 >
                   CES (Computerized Exam System)
-                </a>
+                </NavLink>
               </div>
             </Col>
             <Col xl="6">

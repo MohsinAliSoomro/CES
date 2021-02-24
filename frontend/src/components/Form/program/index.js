@@ -1,11 +1,11 @@
 import { Form, Input, Select } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button, Col } from 'reactstrap';
-import { ListDepartment } from '../../../functions/department';
 import { CreateProgram } from '../../../functions/program';
 import { useToasts } from 'react-toast-notifications';
-import { useDispatch } from 'react-redux'
-import {fetchAllPrograms} from '../../../views/programSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllPrograms } from '../../../views/programSlice';
+import { fetchAllDepartment } from '../dep/departmentSlice';
 const { Option } = Select;
 const layout = {
 	labelCol: {
@@ -24,26 +24,20 @@ const tailLayout = {
 
 const ProgramForm = () => {
 	const { addToast } = useToasts();
-	const [dep, setDep] = useState([]);
-	const dispatch = useDispatch()
-	useEffect(() => {
-		let mounted = true;
-		if (mounted) {
-			ListDepartment().then((res) => {
-				if (res.data) {
-					setDep(res.data);
-				}
-			});
-		}
-		return () => {
-			mounted = false;
-		};
-	}, []);
+	const departments = useSelector((state) => state.department.departments);
+	console.log('department=>', departments);
+	const dispatch = useDispatch();
+	useEffect(
+		() => {
+			dispatch(fetchAllDepartment());
+		},
+		[ dispatch ]
+	);
 
 	const onFinish = (values) => {
 		CreateProgram({ name: values.Program, department: values.Department })
 			.then((res) => {
-				dispatch(fetchAllPrograms())
+				dispatch(fetchAllPrograms());
 				addToast(`${values.Program} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true
@@ -81,9 +75,17 @@ const ProgramForm = () => {
 				]}
 			>
 				<Select placeholder="Select the department" allowClear>
-					{dep.map((d) => {
-						return <Option key={d._id} value={d._id}>{d.name}</Option>;
-					})}
+					{departments.length === 0 ? (
+						'Loading'
+					) : (
+						departments[0].map((d) => {
+							return (
+								<Option key={d._id} value={d._id}>
+									{d.name}
+								</Option>
+							);
+						})
+					)}
 				</Select>
 			</Form.Item>
 			<Form.Item {...tailLayout}>

@@ -1,7 +1,6 @@
 import { Form, Input, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { Button, Col } from 'reactstrap';
-import { ListSemester } from '../../../functions/semester';
 import { CreateSubject } from '../../../functions/subject';
 import { useToasts } from 'react-toast-notifications';
 import { ListProgram } from '../../../functions/program';
@@ -26,7 +25,6 @@ const SubjectForm = () => {
 	const [ program, setProgram ] = useState([]);
 	const [ semester, setSemester ] = useState([]);
 	const { addToast } = useToasts();
-	const [ sub, setSub ] = useState([]);
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {

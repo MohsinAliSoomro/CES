@@ -2,7 +2,7 @@
 import React from "react";
 
 // reactstrap components
-import { Container, Row, Col, Nav, NavItem, NavLink } from "reactstrap";
+import {  Row, Col, Nav, NavItem, NavLink } from "reactstrap";
 
 const Footer = () => {
   return (
@@ -11,14 +11,14 @@ const Footer = () => {
         <Col xl="6">
           <div className="copyright text-center text-xl-left text-muted">
             © {new Date().getFullYear()}{" "}
-            <a
+            <NavItem
               className="font-weight-bold ml-1"
               href="#"
               rel="noopener noreferrer"
               target="_blank"
             >
               CES (Computerized Exam System)
-            </a>
+            </NavItem>
           </div>
         </Col>
 

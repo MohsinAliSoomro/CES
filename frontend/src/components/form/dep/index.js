@@ -2,6 +2,8 @@ import { Form, Input } from 'antd';
 import { Button, Col } from 'reactstrap';
 import { useToasts } from 'react-toast-notifications';
 import { CreateDepartment } from '../../../functions/department';
+import {fetchAllDepartment} from './departmentSlice'
+import {useDispatch} from 'react-redux'
 const layout = {
 	labelCol: {
 		span: 24
@@ -18,11 +20,13 @@ const tailLayout = {
 };
 
 const DepartmentForm = () => {
+	const dispatch = useDispatch();
 	const { addToast } = useToasts();
 	const onFinish = (values) => {
 		console.log('Success:', values);
 		CreateDepartment({ name: values.Department })
 			.then((res) => {
+				dispatch(fetchAllDepartment())
 				addToast(`${values.Department} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true

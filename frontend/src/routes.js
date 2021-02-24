@@ -1,5 +1,5 @@
 import Index from "views/Index.js";
-import Profile from "views/Profile.js";
+// import Profile from "views/Profile.js";
 import Register from "views/Register.js";
 import Login from "views/Login.js";
 import Program from "views/Program.js";

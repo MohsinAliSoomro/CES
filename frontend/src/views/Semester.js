@@ -3,18 +3,9 @@ import SemesterForm from '../components/Form/semester';
 import styles from './Program.module.css';
 // reactstrap components
 import {
-	Badge,
 	Card,
 	CardHeader,
-	CardFooter,
-	DropdownMenu,
-	DropdownItem,
-	UncontrolledDropdown,
-	DropdownToggle,
-	Media,
-	Pagination,
-	PaginationItem,
-	PaginationLink,
+
 	Table,
 	Container,
 	Row
