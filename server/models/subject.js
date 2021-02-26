@@ -17,6 +17,6 @@ const SubjectSchema = mongoose.Schema({
 		enum: [ 'Theory', 'Practical' ],
 		default: 'Theory'
 	}
-});
+},{timestamps: true} );
 
 module.exports = mongoose.model('subject', SubjectSchema);

@@ -38,7 +38,7 @@ const SubjectForm = () => {
 	const onFinish = (values) => {
 		CreateSubject({
 			name: values.Subject,
-			semester: values.Semester,
+			semesterId: values.Semester,
 			creditHour: Number(values.CreditHour),
 			type: values.Type
 		})

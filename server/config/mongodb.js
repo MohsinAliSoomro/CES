@@ -5,7 +5,7 @@ function DatabaseConnection() {
 			useNewUrlParser: true,
 			useFindAndModify: true,
 			useUnifiedTopology: true,
-			useCreateIndex: true
+			useCreateIndex: true,
 		})
 		.then(() => console.log('database Connected'));
 }

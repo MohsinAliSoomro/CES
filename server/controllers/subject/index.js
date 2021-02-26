@@ -11,15 +11,15 @@ exports.subject = {
 			.catch((er) => res.send(er));
 	},
 	subjects: async (req, res) => {
-		const subject = await Subject.find({}).populate('semester');
+		const subject = await Subject.find({}).populate('semesterId');
 		res.send(subject);
 	},
 	subject: async (req, res) => {
-		const subject = await Subject.find({ _id: req.params.id }).populate('semester');
+		const subject = await Subject.find({ _id: req.params.id }).populate('semesterId');
 		res.send(subject);
 	},
 	subjectSemester: async (req, res) => {
-		const subject = await Subject.find({ programId: req.params.id }).populate('semester');
+		const subject = await Subject.find({ programId: req.params.id }).populate('semesterId');
 		res.send(subject);
 	},
 	SubjectDelete: async (req, res) => {
