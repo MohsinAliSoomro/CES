@@ -1,0 +1,38 @@
+{
+  "session": "2020",
+  "rollno": "17-bsit-010",
+  "department": "Computer Science",
+  "program": "BS IT",
+  "studentName": "Muhammad Aasim",
+  "papertype": "Fresh",
+  "semester": "First Semester",
+  "gender":0,
+  "ptype":"Bechlor",
+  "pduration":4,
+  "subjects": [
+    {
+      "name": "Programming Fundamentals",
+      "credithr": 3,
+      "type": "TH",
+      "marks": 74
+    },
+    {
+      "name": "ITC",
+      "credithr": 3,
+      "type": "TH",
+      "marks": 74
+    },
+    {
+      "name": "ITC",
+      "credithr": 3,
+      "type": "PR",
+      "marks": 30
+    },
+    {
+      "name": "PF",
+      "credithr": 3,
+      "type": "PF",
+      "marks": 50
+    }
+  ]
+}
