@@ -20,9 +20,9 @@ import {
 import { ToastProvider } from 'react-toast-notifications';
 // core components
 import Header from 'components/Headers/Header.js';
-import FormForm from 'components/Form/form';
+import MarksLedgerForm from 'components/MarksLedger/form';
 
-const Form = () => {
+const MarksLedger = () => {
 	const dispatch = useDispatch();
 	const subject = useSelector((state) => state.subject.subjects);
 console.log("Subject=>",subject)
@@ -42,9 +42,9 @@ console.log("Subject=>",subject)
 				<div className="row">
 					<div className="col-sm-12 col-lg-6 col-md-6 mb-3">
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
-							<h2 className={styles.formHeading}>Form</h2>
+							<h2 className={styles.formHeading}>Marks Ledger Form</h2>
 							<ToastProvider>
-								<FormForm />
+								<MarksLedgerForm />
 							</ToastProvider>
 						</div>
 					</div>
@@ -59,16 +59,14 @@ console.log("Subject=>",subject)
 					<div className="col">
 						<Card className="shadow">
 							<CardHeader className="border-0">
-								<h3 className="mb-0">Departments & Programs</h3>
+								<h3 className="mb-0">Marks Ledger</h3>
 							</CardHeader>
 							<Table className="align-items-center table-flush" responsive>
 								<thead className="thead-light">
 									<tr>
-										<th scope="col">Subject</th>
-										<th scope="col">Type</th>
-										<th scope="col">Credit hour</th>
-										<th scope="col">Semester</th>
-										<th scope="col">Options</th>
+										<th scope="col">Roll No</th>
+										<th scope="col">Name</th>
+										<th scope="col">Enter Marks</th>
 										<th scope="col" />
 									</tr>
 								</thead>
@@ -161,4 +159,4 @@ console.log("Subject=>",subject)
 	);
 };
 
-export default Form;
+export default MarksLedger;

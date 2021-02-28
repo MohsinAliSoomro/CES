@@ -6,6 +6,7 @@ import Program from "views/Program.js";
 import Semester from "views/Semester.js";
 import Student from 'views/Student.js'
 import Form from 'views/Form.js'
+import MarksLedger from "views/MarksLedger";
 var routes = [
   {
     path: "/index",
@@ -47,6 +48,13 @@ var routes = [
     name: "form",
     icon: "ni ni-bullet-list-67 text-red",
     component: Form,
+    layout: "/admin",
+  },
+  {
+    path: "/MarksLedger",
+    name: "MarksLedger",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: MarksLedger,
     layout: "/admin",
   },
   {
