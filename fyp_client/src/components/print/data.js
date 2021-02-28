@@ -141,7 +141,7 @@ export class ComponentToPrint extends React.PureComponent {
           </div>
           {/* Name  */}
           <p>
-            {data.gender == 0 ? <span>Mr.</span> : <span>Miss.</span>}{" "}
+            {data.gender === 0 ? <span>Mr.</span> : <span>Miss.</span>}{" "}
             {data.studentName}
           </p>
         </div>
@@ -157,7 +157,7 @@ export class ComponentToPrint extends React.PureComponent {
               <td>GP</td>
               <td>Remarks</td>
             </tr>
-            {data.subjects.map((m) => (
+            {data.subjects.map((m) =>(
               <tr>
                 {" "}
                 <td>
@@ -171,9 +171,9 @@ export class ComponentToPrint extends React.PureComponent {
                   {m.type === "TH" ? calcgp(m.marks, 100) : calcgp(m.marks, 50)}{" "}
                 </td>
 
-                {totSub++}
+                @{totSub++,
+                gp +=m.type == "TH"? calcgp(m.marks, 100): calcgp(m.marks, 50)}
                 {
-                  gp +=m.type == "TH"? calcgp(m.marks, 100): calcgp(m.marks, 50)
                 }
               </tr>
             ))}
