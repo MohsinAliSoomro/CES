@@ -3,34 +3,60 @@ import "./style.scss";
 import data from "./data.json";
 export class ComponentToPrint extends React.PureComponent {
   render() {
-    function calcgp(marks) {
-		if((marks*100/100)>=87) {return 4.00}
-		else if((marks*100/100)>=85.5){ return 3.90;}
-		else if((marks*100/100)>=84){return 3.80;}
-		else if((marks*100/100)>=82.5){ return 3.70}
-		else if((marks*100/100)>=81){ return 3.60}
-		else if((marks*100/100)>=79.5){ return 3.50}
-		else if((marks*100/100)>=78){ return 3.40}
-		else if((marks*100/100)>=76.5){ return 3.30}
-		else if((marks*100/100)>=75){ return 3.20}
-		else if((marks*100/100)>=73.5){ return 3.10}
-		else if((marks*100/100)>=72){ return 3.00}
-		else if((marks*100/100)>=70.5){ return 2.87}
-		else if((marks*100/100)>=69){ return 2.75}
-		else if((marks*100/100)>=67.5){ return 2.62}
-		else if((marks*100/100)>=66){ return 2.50}
-		else if((marks*100/100)>=64.5){ return 2.37}
-		else if((marks*100/100)>=63){ return 2.25}
-		else if((marks*100/100)>=61.5){ return 2.12}
-		else if((marks*100/100)>=60){ return 2.00} 
-		else { return 0.0}
+    var totSub = 0;
+    var gp = 0;
+
+    function calcgp(obt, tot) {
+      var obtper = (obt * 100) / tot;
+      if (obtper >= 87) {
+        return 4.0;
+      } else if (obtper >= 85.5) {
+        return 3.9;
+      } else if (obtper >= 84) {
+        return 3.8;
+      } else if (obtper >= 82.5) {
+        return 3.7;
+      } else if (obtper >= 81) {
+        return 3.6;
+      } else if (obtper >= 79.5) {
+        return 3.5;
+      } else if (obtper >= 78) {
+        return 3.4;
+      } else if (obtper >= 76.5) {
+        return 3.3;
+      } else if (obtper >= 75) {
+        return 3.2;
+      } else if (obtper >= 73.5) {
+        return 3.1;
+      } else if (obtper >= 72) {
+        return 3.0;
+      } else if (obtper >= 70.5) {
+        return 2.87;
+      } else if (obtper >= 69) {
+        return 2.75;
+      } else if (obtper >= 67.5) {
+        return 2.62;
+      } else if (obtper >= 66) {
+        return 2.5;
+      } else if (obtper >= 64.5) {
+        return 2.37;
+      } else if (obtper >= 63) {
+        return 2.25;
+      } else if (obtper >= 61.5) {
+        return 2.12;
+      } else if (obtper >= 60) {
+        return 2.0;
+      } else {
+        return 0.0;
+      }
     }
-    function grade(marks) {
-      if (marks > 86) {
+    function grade(obt, tot) {
+      var obtper = (obt * 100) / tot;
+      if (obtper > 86) {
         return "A";
-      } else if (marks > 71) {
+      } else if (obtper > 71) {
         return "B";
-      } else if (marks > 59) {
+      } else if (obtper > 59) {
         return "C";
       } else {
         return "Fail";
@@ -125,18 +151,35 @@ export class ComponentToPrint extends React.PureComponent {
               <td>
                 {data.semester} semester {data.session} {data.papertype}
               </td>
-              <td rowSpan="2">Credit hours</td>
-              <td rowSpan="2">Obt</td>
-              <td rowSpan="2">Grade</td>
-              <td rowSpan="2">GP</td>
-              <td rowSpan="2">Remarks</td>
+              <td>Credit hours</td>
+              <td>Obt</td>
+              <td>Grade</td>
+              <td>GP</td>
+              <td>Remarks</td>
             </tr>
             {data.subjects.map((m) => (
               <tr>
                 {" "}
-                <td>{m.name}</td> <td>{m.credithr}</td> <td>{m.marks}</td> <td>{grade(m.marks)}</td><td>{calcgp(m.marks)}</td>
+                <td>
+                  {m.name}({m.type})
+                </td>{" "}
+                <td>{m.credithr}</td> <td>{m.marks}</td>{" "}
+                <td>
+                  {m.type === "TH" ? grade(m.marks, 100) : grade(m.marks, 50)}
+                </td>
+                <td>
+                  {m.type === "TH" ? calcgp(m.marks, 100) : calcgp(m.marks, 50)}{" "}
+                </td>
+
+                {totSub++}
+                {
+                  gp +=m.type == "TH"? calcgp(m.marks, 100): calcgp(m.marks, 50)
+                }
               </tr>
             ))}
+            <tr>
+              <td>GPA</td> <td>{(gp / totSub).toFixed(2)}</td>
+            </tr>
           </tbody>
         </table>
       </div>

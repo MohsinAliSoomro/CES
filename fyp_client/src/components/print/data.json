@@ -11,28 +11,46 @@
   "pduration":4,
   "subjects": [
     {
+      "name": "English Composition & Comprehension",
+      "credithr": 3,
+      "type": "TH",
+      "marks": 72
+    },
+    {
+      "name": "Pakistan Studies",
+      "credithr": 3,
+      "type": "TH",
+      "marks": 75
+    },
+    {
+      "name": "Elementary Mathematics",
+      "credithr": 3,
+      "type": "TH",
+      "marks": 72
+    },
+    {
+      "name": "Introduction to Computing",
+      "credithr": 3,
+      "type": "TH",
+      "marks": 92
+    },
+    {
+      "name": "Introduction to Computing",
+      "credithr": 1,
+      "type": "PR",
+      "marks": 43
+    },
+    {
       "name": "Programming Fundamentals",
       "credithr": 3,
       "type": "TH",
-      "marks": 74
+      "marks": 87
     },
     {
-      "name": "ITC",
-      "credithr": 3,
-      "type": "TH",
-      "marks": 74
-    },
-    {
-      "name": "ITC",
-      "credithr": 3,
+      "name": "Programming Fundamentals",
+      "credithr": 1,
       "type": "PR",
-      "marks": 30
-    },
-    {
-      "name": "PF",
-      "credithr": 3,
-      "type": "PF",
-      "marks": 50
+      "marks": 40
     }
   ]
 }
