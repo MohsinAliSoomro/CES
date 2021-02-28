@@ -157,7 +157,7 @@ export class ComponentToPrint extends React.PureComponent {
               <td>GP</td>
               <td>Remarks</td>
             </tr>
-            {data.subjects.map((m) =>(
+            {data.subjects.map((m) => (
               <tr>
                 {" "}
                 <td>
@@ -170,11 +170,14 @@ export class ComponentToPrint extends React.PureComponent {
                 <td>
                   {m.type === "TH" ? calcgp(m.marks, 100) : calcgp(m.marks, 50)}{" "}
                 </td>
-
-                @{totSub++,
-                gp +=m.type == "TH"? calcgp(m.marks, 100): calcgp(m.marks, 50)}
                 {
+                  (totSub++,
+                  (gp +=
+                    m.type == "TH"
+                      ? calcgp(m.marks, 100)
+                      : calcgp(m.marks, 50)))
                 }
+                {}
               </tr>
             ))}
             <tr>
