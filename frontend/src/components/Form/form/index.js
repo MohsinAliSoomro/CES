@@ -1,4 +1,4 @@
-import { Form, Input, Select } from 'antd';
+import { Form, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { Button, Col } from 'reactstrap';
 import { CreateFrom } from '../../../functions/form';
@@ -31,15 +31,13 @@ const FormForm = () => {
 	const program = useSelector((state) => state.program.programs);
 	const student = useSelector((state) => state.student.students);
 	const [ selectedSubject, setSelectedSubject ] = useState([]);
-	console.log('Student=>', student);
-	const sm = [];
 	const dispatch = useDispatch();
 	useEffect(
 		() => {
 			dispatch(fetchAllPrograms());
-			dispatch(fetchAllSubject());
+
 			dispatch(fetchAllSemester());
-			dispatch(fetchAllStudent());
+			
 		},
 		[ dispatch ]
 	);
@@ -47,7 +45,7 @@ const FormForm = () => {
 	const onFinish = (values) => {
 		CreateFrom({
 			programId: values.Program,
-			subjectId: sm,
+			subjectId: selectedSubject,
 			studentId: values.Student,
 			semesterId: values.Semester,
 			type: 'Fresh'
@@ -65,24 +63,22 @@ const FormForm = () => {
 				});
 			});
 	};
-	const handleSubjects = (value) => {
-		sm.push(value);
-		console.log(sm);
+	const handleProgram = (value) => {
+		dispatch(fetchAllSemester(value));
+		dispatch(fetchAllStudent(value))
 	};
+	const handleSemester = (value) => {
+		dispatch(fetchAllSubject(value));
+	};
+	const handleSubjects = (value) => {
+		setSelectedSubject(value);
+	};
+	const handleStudent = (value) => {
+		dispatch(fetchAllStudent());
+	};
+
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
-			{/* <Form.Item
-				label="Program"
-				name="Program"
-				rules={[
-					{
-						required: true,
-						message: 'Please input your Program!'
-					}
-				]}
-			>
-				<Input />
-			</Form.Item> */}
 			<Form.Item
 				label="Program"
 				name="Program"
@@ -92,34 +88,11 @@ const FormForm = () => {
 					}
 				]}
 			>
-				<Select placeholder="Select the program" allowClear>
+				<Select placeholder="Select the program" onChange={handleProgram} allowClear>
 					{program.length === 0 ? (
 						'Loading'
 					) : (
-						program[0].map((p) => {
-							return (
-								<Option key={p._id} value={p._id}>
-									{p.name}
-								</Option>
-							);
-						})
-					)}
-				</Select>
-			</Form.Item>
-			<Form.Item
-				label="Subject"
-				name="Subject"
-				rules={[
-					{
-						required: true
-					}
-				]}
-			>
-				<Select placeholder="Select the Subject" onChange={handleSubjects} allowClear>
-					{subject.length === 0 ? (
-						'Loading'
-					) : (
-						subject[0].map((s) => {
+						program[0].map((s) => {
 							return (
 								<Option key={s._id} value={s._id}>
 									{s.name}
@@ -138,7 +111,7 @@ const FormForm = () => {
 					}
 				]}
 			>
-				<Select placeholder="Select the Semester" allowClear>
+				<Select placeholder="Select the Semester" onChange={handleSemester} allowClear>
 					{semester.length === 0 ? (
 						'Loading'
 					) : (
@@ -152,6 +125,39 @@ const FormForm = () => {
 					)}
 				</Select>
 			</Form.Item>
+
+			<Form.Item
+				label="Subject"
+				name="Subject"
+				rules={[
+					{
+						required: true
+					}
+				]}
+			>
+				<Select
+					mode="multiple"
+					allowClear
+					style={{ width: '100%' }}
+					placeholder="Please select"
+					onChange={handleSubjects}
+					placeholder="Select the program"
+					allowClear
+				>
+					{subject.length === 0 ? (
+						<div>Loading...</div>
+					) : (
+						subject[0].map((s) => {
+							return (
+								<Option key={s._id} value={s._id}>
+									{s.name}
+								</Option>
+							);
+						})
+					)}
+				</Select>
+			</Form.Item>
+
 			<Form.Item
 				label="Student"
 				name="Student"

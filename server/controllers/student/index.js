@@ -14,6 +14,10 @@ exports.student = {
 		const student = await Student.find({}).populate("programId");
 		res.send(student);
 	},
+	studentProgram: async (req, res) => {
+		const student = await Student.find({programId:req.params.id}).populate("programId");
+		res.send(student);
+	},
 	student: async (req, res) => {
 		const student = await Student.find({ _id: req.params.id });
 		res.send(student);

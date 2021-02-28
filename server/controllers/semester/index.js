@@ -17,8 +17,8 @@ exports.semester = {
 	semester: async (req, res) => {
 		const semester = await Semester.find({ _id: req.params.id });
 		res.send(semester);
-    },
-    semesterProgram: async (req, res) => {
+	},
+	semesterProgram: async (req, res) => {
 		const semester = await Semester.find({ programId: req.params.id });
 		res.send(semester);
 	},

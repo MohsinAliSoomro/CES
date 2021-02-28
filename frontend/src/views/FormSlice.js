@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ListSubject } from '../functions/subject';
+import { FindSubject } from '../functions/subject';
 
-export const fetchAllSubject = createAsyncThunk('subject/fetchAllSubject', async () => {
-	const result = await ListSubject();
+export const fetchAllSubject = createAsyncThunk('subject/fetchAllSubject', async (id) => {
+	const result = await FindSubject(id);
 	return result.data;
 });
 
@@ -27,7 +27,7 @@ const SubjectSlice = createSlice({
 		},
 		[fetchAllSubject.rejected]: (state) => {
 			state.loading = false;
-			state.error = 'The error in fetching programs';
+			state.error = 'The error in fetching subject';
 			state.subjects.length = 0;
 		}
 	}

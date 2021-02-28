@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ListSemester } from '../../../functions/semester';
+import { SemesterProgram } from '../../../functions/semester';
 
-export const fetchAllSemester = createAsyncThunk('semester/fetchAllSemester', async () => {
-	const result = await ListSemester();
+export const fetchAllSemester = createAsyncThunk('semester/fetchAllSemester', async (id) => {
+	const result = await SemesterProgram(id);
 	return result.data;
 });
 

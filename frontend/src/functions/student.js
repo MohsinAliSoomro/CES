@@ -6,3 +6,7 @@ export const CreateStudent = (dep) => {
 export const ListStudent = () => {
 	return axios.get(`${process.env.REACT_APP_API}/student/students`);
 };
+
+export const StudentProgram = (id) => {
+	return axios.get(`${process.env.REACT_APP_API}/student/studentprogram/${id}`);
+};

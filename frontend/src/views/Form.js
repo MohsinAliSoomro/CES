@@ -51,10 +51,8 @@ console.log("Subject=>",subject)
 					</div>
 					<div className="col-sm-12 col-lg-6 col-md-6 mb-3">
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
-							<h2 className={styles.formHeading}>Program</h2>
-							<ToastProvider>
-								<ProgramForm />
-							</ToastProvider>
+							
+							
 						</div>
 					</div>
 				</div>
