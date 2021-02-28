@@ -1,13 +1,12 @@
 import { Form, Select } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button, Col } from 'reactstrap';
-import { CreateFrom } from '../../../functions/form';
 import { useToasts } from 'react-toast-notifications';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllPrograms } from '../../../views/programSlice';
 import { fetchAllSemester } from './semesterSlice';
 import { fetchAllSubject } from '../../../views/FormSlice';
-import { fetchAllStudent } from '../../../views/studentSlice';
+import { fromSearch } from '../../../functions/marksLadger';
 const { Option } = Select;
 const layout = {
 	labelCol: {
@@ -24,33 +23,29 @@ const tailLayout = {
 	}
 };
 
-const FormForm = () => {
+const FormForm = ({setStudent}) => {
 	const { addToast } = useToasts();
 	const subject = useSelector((state) => state.subject.subjects);
 	const semester = useSelector((state) => state.semester.semesters);
 	const program = useSelector((state) => state.program.programs);
-	const student = useSelector((state) => state.student.students);
-	const [ selectedSubject, setSelectedSubject ] = useState([]);
 	const dispatch = useDispatch();
 	useEffect(
 		() => {
 			dispatch(fetchAllPrograms());
-
-			dispatch(fetchAllSemester());
-			
 		},
 		[ dispatch ]
 	);
-
 	const onFinish = (values) => {
-		CreateFrom({
+		fromSearch({
 			programId: values.Program,
-			subjectId: selectedSubject,
-			studentId: values.Student,
+			subjectId: values.Subject,
 			semesterId: values.Semester,
-			type: 'Fresh'
+			type: values.Type
 		})
 			.then((res) => {
+				setStudent(res.data);
+				console.log(res.data);
+
 				addToast(`${values.Program} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true
@@ -65,22 +60,15 @@ const FormForm = () => {
 	};
 	const handleProgram = (value) => {
 		dispatch(fetchAllSemester(value));
-		dispatch(fetchAllStudent(value))
 	};
 	const handleSemester = (value) => {
 		dispatch(fetchAllSubject(value));
 	};
-	const handleSubjects = (value) => {
-		setSelectedSubject(value);
-	};
-	const handleStudent = (value) => {
-		dispatch(fetchAllStudent());
-	};
+
 
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
-			
-			<Form.Item
+			{/* <Form.Item
 				label="Session"
 				name="Session"
 				rules={[
@@ -88,8 +76,8 @@ const FormForm = () => {
 						required: true
 					}
 				]}
-			></Form.Item>
-			
+			></Form.Item> */}
+
 			<Form.Item
 				label="Program"
 				name="Program"
@@ -149,9 +137,7 @@ const FormForm = () => {
 				<Select
 					allowClear
 					style={{ width: '100%' }}
-					placeholder="Please select"
-					onChange={handleSubjects}
-					placeholder="Select the program"
+					placeholder="Select the Subject"
 					allowClear
 				>
 					{subject.length === 0 ? (

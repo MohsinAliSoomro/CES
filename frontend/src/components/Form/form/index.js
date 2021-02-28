@@ -48,7 +48,7 @@ const FormForm = () => {
 			subjectId: selectedSubject,
 			studentId: values.Student,
 			semesterId: values.Semester,
-			type: 'Fresh'
+			type: values.Type
 		})
 			.then((res) => {
 				addToast(`${values.Program} Added successfully...`, {
