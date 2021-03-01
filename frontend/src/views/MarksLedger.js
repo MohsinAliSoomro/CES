@@ -26,9 +26,15 @@ const MarksLedger = () => {
 	const handleSubmit = () => {
 		// axios.post('http://localhost:4000/marks/create',{formId:,subjectId:12,marks:12})
 	};
+	const markss=[]
 	const handleInput = (e, index) => {
-		console.log(e.target.value, index);
+		
+			markss.push(e.target.value, index)
+		
+		console.log(markss)
 	};
+	
+
 	return (
 		<React.Fragment>
 			<Header />
@@ -93,7 +99,7 @@ const MarksLedger = () => {
 													</th>
 													<td>{pro.studentId.lastName}</td>
 													<td>
-														<input type="number" value={mark.id[index]} onChange={(e)=>handleInput(e,index)} />
+														<input type="number" value={mark.id[index]} onBlur={(e)=>handleInput(e,index)} />
 														{/* <FormComponent value={mark[index].id} setValue={setMark} /> */}
 
 														<button type="submit">Submit</button>
