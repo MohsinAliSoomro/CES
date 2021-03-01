@@ -22,10 +22,12 @@ import MarksLedgerForm from 'components/MarksLedger/form';
 
 const MarksLedger = () => {
 	const [ student, setStudent ] = useState([]);
-	const [ mark, setMark ] = useState();
-	console.log(student);
+	const [ mark, setMark ] = useState({id:''});
 	const handleSubmit = () => {
 		// axios.post('http://localhost:4000/marks/create',{formId:,subjectId:12,marks:12})
+	};
+	const handleInput = (e, index) => {
+		console.log(e.target.value, index);
 	};
 	return (
 		<React.Fragment>
@@ -63,10 +65,8 @@ const MarksLedger = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{student.length === 0 ? (
-										<div>Loading....</div>
-									) : (
-										student.map((pro) => {
+									{student.length > 0 &&
+										student.map((pro, index) => {
 											return (
 												<tr key={pro.studentId._id}>
 													<th scope="row">
@@ -93,25 +93,10 @@ const MarksLedger = () => {
 													</th>
 													<td>{pro.studentId.lastName}</td>
 													<td>
-														<form
-															onSubmit={(e) => {
-																e.preventDefault()
-																axios.post('http://localhost:4000/marks/create', {
-																	formId: pro._id,
-																	subjectId: pro.subjectId._id,
-																	marks: parseInt(mark)
-																}).then(res => console.log(res))
-																	.catch(er => console.log(er))
-															}}
-														>
-															<input
-																type="number"
-																value={mark}
-																onChange={(e) => setMark(e.target.value)}
-																placeholder="Add Marks"
-															/>
-															<button type="submit">Submit</button>
-														</form>
+														<input type="number" value={mark.id[index]} onChange={(e)=>handleInput(e,index)} />
+														{/* <FormComponent value={mark[index].id} setValue={setMark} /> */}
+
+														<button type="submit">Submit</button>
 													</td>
 													{/* <td>{pro.creditHour}</td>
                                                     <td>{pro.semesterId.name}</td> */}
@@ -158,8 +143,7 @@ const MarksLedger = () => {
 													</td>
 												</tr>
 											);
-										})
-									)}
+										})}
 								</tbody>
 							</Table>
 							<CardFooter className="py-4">
@@ -174,4 +158,16 @@ const MarksLedger = () => {
 	);
 };
 
+
+const FormComponent = ({ value, setValue }) => {
+	const handleInputs = (e,index) => {
+		
+	}
+	console.log('value', value, 'Function', setValue);
+	return (
+		<div>
+			<input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+		</div>
+	);
+};
 export default MarksLedger;
