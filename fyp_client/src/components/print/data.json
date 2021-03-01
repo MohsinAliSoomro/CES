@@ -14,31 +14,31 @@
       "name": "English Composition & Comprehension",
       "credithr": 3,
       "type": "TH",
-      "marks": 72
+      "marks": 90
     },
     {
       "name": "Pakistan Studies",
       "credithr": 3,
       "type": "TH",
-      "marks": 75
+      "marks": 87
     },
     {
       "name": "Elementary Mathematics",
       "credithr": 3,
       "type": "TH",
-      "marks": 72
+      "marks": 87
     },
     {
       "name": "Introduction to Computing",
       "credithr": 3,
       "type": "TH",
-      "marks": 92
+      "marks": 87
     },
     {
       "name": "Introduction to Computing",
       "credithr": 1,
       "type": "PR",
-      "marks": 43
+      "marks": 50
     },
     {
       "name": "Programming Fundamentals",
@@ -50,7 +50,7 @@
       "name": "Programming Fundamentals",
       "credithr": 1,
       "type": "PR",
-      "marks": 40
+      "marks": 50
     }
   ]
 }
