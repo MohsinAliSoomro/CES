@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Program.module.css';
 import axios from 'axios';
-import qs from 'qs';
 import {
 	Badge,
 	Card,
@@ -15,7 +14,6 @@ import {
 	Table,
 	Container,
 	Row,
-	Button
 } from 'reactstrap';
 import { ToastProvider } from 'react-toast-notifications';
 // core components
@@ -29,13 +27,10 @@ const MarksLedger = () => {
 
 	const form = [ { mark: '', formId: '', subjectId: '' } ];
 	const handleInput = (e, index, frm) => {
-		// markss.push({ mark: e.target.value, formId: frm });
 		const mrk = form.map((i) => i.mark);
 		const fr = form.map((i) => i.formId);
 		const sb = form.map((i) => i.subjectId);
 		if (mrk !== '' && fr !== '' && sb !== '') {
-			// const removeDuplicate = [ ...new Set(form.map((i) => i.formId)) ];
-
 			form.push({ marks: parseInt(e.target.value), formId: frm, subjectId: subject });
 			console.log(form);
 		}
@@ -43,9 +38,12 @@ const MarksLedger = () => {
 
 	const handleSubmit = () => {
 		axios
-			.post('http://localhost:4000/marks/marks', form)
-			.then((res) => console.log('Successfully Created', res.data))
-			.catch((er) => console.log(er));
+			.post(`${process.env.REACT_APP_API}/marks/marks`, form)
+			.then((res) => {
+				alert('Marks Added');
+				form.length = 0;
+			})
+			.catch((er) => alert(er));
 	};
 	return (
 		<React.Fragment>
@@ -116,11 +114,7 @@ const MarksLedger = () => {
 															value={mark.mrk[index]}
 															onBlur={(e) => handleInput(e, index, pro._id)}
 														/>
-														{/* <FormComponent value={mark[index].id} setValue={setMark} /> */}
-
-														<button type="submit" onClick={handleSubmit}>
-															Submit
-														</button>
+														]
 													</td>
 													{/* <td>{pro.creditHour}</td>
                                                     <td>{pro.semesterId.name}</td> */}
@@ -171,13 +165,4 @@ const MarksLedger = () => {
 	);
 };
 
-const FormComponent = ({ value, setValue }) => {
-	const handleInputs = (e, index) => {};
-	console.log('value', value, 'Function', setValue);
-	return (
-		<div>
-			<input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-		</div>
-	);
-};
 export default MarksLedger;

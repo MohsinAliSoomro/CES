@@ -12,7 +12,7 @@ exports.marks = {
 			res.send(marks);
 		} catch (er) {
 			res.json({ message: 'errors' });
-	}
+		}
 	},
 	ListMarks: async function(req, res) {
 		const listMarks = await Marks.find({}).populate('formId').populate('subjectId');
