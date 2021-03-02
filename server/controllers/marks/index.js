@@ -6,6 +6,14 @@ exports.marks = {
 		await newMarks.save();
 		res.send(newMarks);
 	},
+	InsertMarks: async function(req, res) {
+		try {
+			const marks = await Marks.create(req.body);
+			res.send(marks);
+		} catch (er) {
+			res.json({ message: 'errors' });
+	}
+	},
 	ListMarks: async function(req, res) {
 		const listMarks = await Marks.find({}).populate('formId').populate('subjectId');
 		res.send(listMarks);

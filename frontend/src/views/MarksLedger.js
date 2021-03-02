@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Program.module.css';
 import axios from 'axios';
+import qs from 'qs';
 import {
 	Badge,
 	Card,
@@ -13,7 +14,8 @@ import {
 	Media,
 	Table,
 	Container,
-	Row
+	Row,
+	Button
 } from 'reactstrap';
 import { ToastProvider } from 'react-toast-notifications';
 // core components
@@ -22,24 +24,33 @@ import MarksLedgerForm from 'components/MarksLedger/form';
 
 const MarksLedger = () => {
 	const [ student, setStudent ] = useState([]);
-	const [ mark, setMark ] = useState({id:''});
-	const handleSubmit = () => {
-		// axios.post('http://localhost:4000/marks/create',{formId:,subjectId:12,marks:12})
-	};
-	const markss=[]
-	const handleInput = (e, index) => {
-		
-			markss.push(e.target.value, index)
-		
-		console.log(markss)
-	};
-	
+	const [ subject, setSubject ] = useState();
+	const [ mark, setMark ] = useState({ mrk: '', formId: '', subject: '' });
 
+	const form = [ { mark: '', formId: '', subjectId: '' } ];
+	const handleInput = (e, index, frm) => {
+		// markss.push({ mark: e.target.value, formId: frm });
+		const mrk = form.map((i) => i.mark);
+		const fr = form.map((i) => i.formId);
+		const sb = form.map((i) => i.subjectId);
+		if (mrk !== '' && fr !== '' && sb !== '') {
+			// const removeDuplicate = [ ...new Set(form.map((i) => i.formId)) ];
+
+			form.push({ marks: parseInt(e.target.value), formId: frm, subjectId: subject });
+			console.log(form);
+		}
+	};
+
+	const handleSubmit = () => {
+		axios
+			.post('http://localhost:4000/marks/marks', form)
+			.then((res) => console.log('Successfully Created', res.data))
+			.catch((er) => console.log(er));
+	};
 	return (
 		<React.Fragment>
 			<Header />
 			{/* Page content */}
-
 			<Container className="mt--7" fluid>
 				{/* Table */}
 				<div className="row">
@@ -47,7 +58,7 @@ const MarksLedger = () => {
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
 							<h2 className={styles.formHeading}>Marks Ledger Form</h2>
 							<ToastProvider>
-								<MarksLedgerForm setStudent={setStudent} />
+								<MarksLedgerForm setStudent={setStudent} setSubject={setSubject} />
 							</ToastProvider>
 						</div>
 					</div>
@@ -73,6 +84,7 @@ const MarksLedger = () => {
 								<tbody>
 									{student.length > 0 &&
 										student.map((pro, index) => {
+											console.log(pro);
 											return (
 												<tr key={pro.studentId._id}>
 													<th scope="row">
@@ -99,10 +111,16 @@ const MarksLedger = () => {
 													</th>
 													<td>{pro.studentId.lastName}</td>
 													<td>
-														<input type="number" value={mark.id[index]} onBlur={(e)=>handleInput(e,index)} />
+														<input
+															type="number"
+															value={mark.mrk[index]}
+															onBlur={(e) => handleInput(e, index, pro._id)}
+														/>
 														{/* <FormComponent value={mark[index].id} setValue={setMark} /> */}
 
-														<button type="submit">Submit</button>
+														<button type="submit" onClick={handleSubmit}>
+															Submit
+														</button>
 													</td>
 													{/* <td>{pro.creditHour}</td>
                                                     <td>{pro.semesterId.name}</td> */}
@@ -132,18 +150,6 @@ const MarksLedger = () => {
 																>
 																	Action
 																</DropdownItem>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Another action
-																</DropdownItem>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Something else here
-																</DropdownItem>
 															</DropdownMenu>
 														</UncontrolledDropdown>
 													</td>
@@ -154,6 +160,7 @@ const MarksLedger = () => {
 							</Table>
 							<CardFooter className="py-4">
 								<nav aria-label="..." />
+								<button onClick={handleSubmit}>Save</button>
 							</CardFooter>
 						</Card>
 					</div>
@@ -164,11 +171,8 @@ const MarksLedger = () => {
 	);
 };
 
-
 const FormComponent = ({ value, setValue }) => {
-	const handleInputs = (e,index) => {
-		
-	}
+	const handleInputs = (e, index) => {};
 	console.log('value', value, 'Function', setValue);
 	return (
 		<div>

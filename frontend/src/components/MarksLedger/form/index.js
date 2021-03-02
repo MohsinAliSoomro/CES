@@ -1,5 +1,5 @@
 import { Form, Select } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col } from 'reactstrap';
 import { useToasts } from 'react-toast-notifications';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,11 +23,12 @@ const tailLayout = {
 	}
 };
 
-const FormForm = ({setStudent}) => {
+const FormForm = ({setStudent,setSubject}) => {
 	const { addToast } = useToasts();
 	const subject = useSelector((state) => state.subject.subjects);
 	const semester = useSelector((state) => state.semester.semesters);
 	const program = useSelector((state) => state.program.programs);
+
 	const dispatch = useDispatch();
 	useEffect(
 		() => {
@@ -64,7 +65,9 @@ const FormForm = ({setStudent}) => {
 	const handleSemester = (value) => {
 		dispatch(fetchAllSubject(value));
 	};
-
+	const handleSubject = (value) => {
+		setSubject(value)
+}
 
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
@@ -139,6 +142,7 @@ const FormForm = ({setStudent}) => {
 					style={{ width: '100%' }}
 					placeholder="Select the Subject"
 					allowClear
+					onChange={handleSubject}
 				>
 					{subject.length === 0 ? (
 						<div>Loading...</div>
