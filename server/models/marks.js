@@ -19,7 +19,12 @@ const MarksSchema = mongoose.Schema(
 				type: Number,
 				required: true
 			}
-		]
+		],
+		studentId: {
+			ref: 'student',
+			type: mongoose.Schema.Types.ObjectId,
+			required:true,
+		}
 	},
 	{ timestamps: true }
 );

@@ -6,14 +6,13 @@ import { useToasts } from 'react-toast-notifications';
 import { ListProgram } from '../../../functions/program';
 // import { SemesterProgram } from '../../../functions/semester';
 import { CreateStudent } from 'functions/student';
-import { fetchAllStudent } from '../../../views/studentSlice'
-import {useDispatch} from 'react-redux'
+import { fetchAllStudent } from '../../../views/studentSlice';
+import { useDispatch } from 'react-redux';
 const { Option } = Select;
 
 const layout = {
 	labelCol: {
 		span: 24
-
 	},
 	wrapperCol: {
 		span: 24
@@ -31,7 +30,7 @@ const SubjectForm = () => {
 	const [ program, setProgram ] = useState([]);
 	// const [semester, setSemester] = useState([]);
 	const { addToast } = useToasts();
-	const [selectPrgrm,setSelectProgram]=useState('')
+	const [ selectPrgrm, setSelectProgram ] = useState('');
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
@@ -44,6 +43,7 @@ const SubjectForm = () => {
 
 	const onFinish = (values) => {
 		CreateStudent({
+			rollno: values.rollNo,
 			firstName: values.firstName,
 			lastName: values.lastName,
 			fatherName: values.fatherName,
@@ -52,10 +52,10 @@ const SubjectForm = () => {
 			nationality: values.nationality,
 			address: values.address,
 			programId: selectPrgrm,
-			district:values.district
+			district: values.district
 		})
 			.then((res) => {
-				dispatch(fetchAllStudent())
+				dispatch(fetchAllStudent());
 				addToast(`${values.Subject} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true
@@ -73,11 +73,11 @@ const SubjectForm = () => {
 		values.Type = '';
 	};
 	const selectProgram = (value) => {
-		setSelectProgram(value)
+		setSelectProgram(value);
 		console.log(value);
 		// SemesterProgram(value).then((res) => {
 		// 	setSemester(res.data);
-		// 	console.log("semester=> ",res.data);	
+		// 	console.log("semester=> ",res.data);
 		// });
 	};
 	return (
@@ -102,7 +102,18 @@ const SubjectForm = () => {
 					})}
 				</Select>
 			</Form.Item>
-
+			<Form.Item
+				label="RollNo"
+				name="rollNo"
+				rules={[
+					{
+						required: true,
+						message: 'Please input your RollNo!'
+					}
+				]}
+			>
+				<Input />
+			</Form.Item>
 			<Form.Item
 				label="First Name"
 				name="firstName"
@@ -115,6 +126,7 @@ const SubjectForm = () => {
 			>
 				<Input />
 			</Form.Item>
+
 			<Form.Item
 				label="Last Name"
 				name="lastName"

@@ -1,5 +1,5 @@
 import { Form, Select } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button, Col } from 'reactstrap';
 import { useToasts } from 'react-toast-notifications';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +23,7 @@ const tailLayout = {
 	}
 };
 
-const FormForm = ({setStudent,setSubject}) => {
+const FormForm = ({ setStudent, setSubject, type }) => {
 	const { addToast } = useToasts();
 	const subject = useSelector((state) => state.subject.subjects);
 	const semester = useSelector((state) => state.semester.semesters);
@@ -41,7 +41,7 @@ const FormForm = ({setStudent,setSubject}) => {
 			programId: values.Program,
 			subjectId: values.Subject,
 			semesterId: values.Semester,
-			type: values.Type
+			type: type
 		})
 			.then((res) => {
 				setStudent(res.data);
@@ -53,7 +53,7 @@ const FormForm = ({setStudent,setSubject}) => {
 				});
 			})
 			.catch((err) => {
-				addToast(`Something Errors check connecting`, {
+				addToast(err.message, {
 					appearance: 'error',
 					autoDismiss: true
 				});
@@ -66,8 +66,8 @@ const FormForm = ({setStudent,setSubject}) => {
 		dispatch(fetchAllSubject(value));
 	};
 	const handleSubject = (value) => {
-		setSubject(value)
-}
+		setSubject(value);
+	};
 
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
@@ -91,17 +91,14 @@ const FormForm = ({setStudent,setSubject}) => {
 				]}
 			>
 				<Select placeholder="Select the program" onChange={handleProgram} allowClear>
-					{program.length === 0 ? (
-						'Loading'
-					) : (
+					{program.length > 0 &&
 						program[0].map((s) => {
 							return (
 								<Option key={s._id} value={s._id}>
 									{s.name}
 								</Option>
 							);
-						})
-					)}
+						})}
 				</Select>
 			</Form.Item>
 			<Form.Item
@@ -114,17 +111,14 @@ const FormForm = ({setStudent,setSubject}) => {
 				]}
 			>
 				<Select placeholder="Select the Semester" onChange={handleSemester} allowClear>
-					{semester.length === 0 ? (
-						'Loading'
-					) : (
+					{semester.length > 0 &&
 						semester[0].map((sm) => {
 							return (
 								<Option key={sm._id} value={sm._id}>
 									{sm.name}
 								</Option>
 							);
-						})
-					)}
+						})}
 				</Select>
 			</Form.Item>
 
@@ -144,20 +138,17 @@ const FormForm = ({setStudent,setSubject}) => {
 					allowClear
 					onChange={handleSubject}
 				>
-					{subject.length === 0 ? (
-						<div>Loading...</div>
-					) : (
+					{subject.length > 0 &&
 						subject[0].map((s) => {
 							return (
 								<Option key={s._id} value={s._id}>
 									{s.name}
 								</Option>
 							);
-						})
-					)}
+						})}
 				</Select>
 			</Form.Item>
-			<Form.Item
+			{/* <Form.Item
 				label="Type"
 				name="Type"
 				rules={[
@@ -170,7 +161,7 @@ const FormForm = ({setStudent,setSubject}) => {
 					<Option value="Fresh">Fresh</Option>
 					<Option value="Improve/Failure">Improve/Failure</Option>
 				</Select>
-			</Form.Item>
+			</Form.Item> */}
 			<Form.Item {...tailLayout}>
 				<Col className="text-right" xs="4">
 					<Button color="primary" size="md">
