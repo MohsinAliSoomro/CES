@@ -13,7 +13,7 @@ import {
 	Media,
 	Table,
 	Container,
-	Row,
+	Row
 } from 'reactstrap';
 import { ToastProvider } from 'react-toast-notifications';
 // core components
@@ -25,12 +25,21 @@ const MarksLedger = () => {
 	const [ subject, setSubject ] = useState();
 	const [ mark, setMark ] = useState({ mrk: '', formId: '', subject: '' });
 
-	const form = [ { mark: '', formId: '', subjectId: '' } ];
+	const form = [ { marks: '', formId: '', subjectId: '' } ];
 	const handleInput = (e, index, frm) => {
-		const mrk = form.map((i) => i.mark);
+		const mrk = form.map((i) => i.marks);
 		const fr = form.map((i) => i.formId);
 		const sb = form.map((i) => i.subjectId);
 		if (mrk !== '' && fr !== '' && sb !== '') {
+			for (let i = 0; i < fr.length; i++) {
+				const element = fr[i];
+				if (frm === element) {
+					const findIndex = form.findIndex((obj) => obj.formId === element);
+					form[findIndex].marks = parseInt(e.target.value);
+					console.log(form)
+					return;
+				}
+			}
 			form.push({ marks: parseInt(e.target.value), formId: frm, subjectId: subject });
 			console.log(form);
 		}
