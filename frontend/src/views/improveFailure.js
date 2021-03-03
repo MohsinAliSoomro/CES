@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Program.module.css';
-import axios from 'axios';
+
+import { UpdateMarks } from '../functions/marks';
 import {
 	Badge,
 	Card,
@@ -29,46 +30,21 @@ const ImproveFailure = () => {
 	const [ student, setStudent ] = useState([]);
 	const [ subject, setSubject ] = useState();
 	const [ isOpen, setIsOpen ] = useState({ isOpen: false, studentId: '', subjectId: '', formId: '' });
-	const [ mark, setMark ] = useState({ mrk: '', formId: '', subject: '' });
+
 	const [ updatedMarks, setUpdatedMarks ] = useState(0);
 	const form = [ { marks: '', formId: '', subjectId: '' } ];
-	const handleInput = (e, index, frm) => {
-		const mrk = form.map((i) => i.marks);
-		const fr = form.map((i) => i.formId);
-		const sb = form.map((i) => i.subjectId);
-		if (mrk !== '' && fr !== '' && sb !== '') {
-			for (let i = 0; i < fr.length; i++) {
-				const element = fr[i];
-				if (frm === element) {
-					const findIndex = form.findIndex((obj) => obj.formId === element);
-					form[findIndex].marks = parseInt(e.target.value);
-					return;
-				}
-			}
-			form.push({ marks: parseInt(e.target.value), formId: frm, subjectId: subject });
-		}
-	};
-	console.log(isOpen);
+
 	const handelUpdateMarks = (e) => {
 		e.preventDefault();
 		const data = { formId: isOpen.formId, marks: updatedMarks };
-		axios
-			.post(`${process.env.REACT_APP_API}/marks/marks/${isOpen.subjectId}/${isOpen.studentId}`, data)
+		UpdateMarks(isOpen.subjectId, isOpen.studentId, data)
 			.then((res) => {
 				alert('Marks Added');
 				form.length = 0;
 			})
 			.catch((er) => alert(er));
 	};
-	// const handleSubmit = () => {
-	// 	axios
-	// 		.post(`${process.env.REACT_APP_API}/marks/marks`, form)
-	// 		.then((res) => {
-	// 			alert('Marks Added');
-	// 			form.length = 0;
-	// 		})
-	// 		.catch((er) => alert(er));
-	// };
+
 	return (
 		<React.Fragment>
 			<Header />
@@ -136,17 +112,10 @@ const ImproveFailure = () => {
 														</Media>
 													</th>
 													<td>{pro.studentId.lastName}</td>
+
 													<td>
-														<input
-															type="number"
-															value={mark.mrk[index]}
-															onBlur={(e) => handleInput(e, index, pro._id)}
-														/>
-													</td>
-													{/* <td>{pro.creditHour}</td>
-                                                    <td>{pro.semesterId.name}</td> */}
-													<td>
-														<button
+														<Button
+															color="secondary"
 															onClick={() =>
 																setIsOpen({
 																	isOpen: true,
@@ -156,7 +125,7 @@ const ImproveFailure = () => {
 																})}
 														>
 															Marks
-														</button>
+														</Button>
 													</td>
 													<td>121</td>
 													<td className="text-right">
@@ -207,7 +176,9 @@ const ImproveFailure = () => {
 						</form>
 					</ModalBody>
 					<ModalFooter>
-						<Button color="primary">Save</Button>
+						<Button color="primary" onClick={() => setIsOpen({ isOpen: false })}>
+							Cancel
+						</Button>
 					</ModalFooter>
 				</Modal>
 			</Container>

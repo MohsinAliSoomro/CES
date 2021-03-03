@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Program.module.css';
 import axios from 'axios';
+import { InsertMarks } from '../functions/marks';
 import {
 	Badge,
 	Card,
@@ -33,7 +34,7 @@ const MarksLedger = () => {
 		if (mrk !== '' && fr !== '' && sb !== '') {
 			for (let i = 0; i < fr.length; i++) {
 				const element = fr[i];
-				if (frm === element) {	
+				if (frm === element) {
 					const findIndex = form.findIndex((obj) => obj.formId === element);
 					form[findIndex].marks = parseInt(e.target.value);
 					return;
@@ -50,10 +51,9 @@ const MarksLedger = () => {
 	};
 
 	const handleSubmit = () => {
-		axios
-			.post(`${process.env.REACT_APP_API}/marks/marks`, form)
+		InsertMarks(form)
 			.then((res) => {
-				console.log("Result",res)
+				console.log('Result', res);
 				form.length = 0;
 			})
 			.catch((er) => alert(er));

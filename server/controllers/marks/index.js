@@ -29,7 +29,7 @@ exports.marks = {
 	updateMarks: async function(req, res) {
 		try {
 			// const listMarks = await Marks.find({ subjectId: req.params.subjectId, studentId: req.params.studentId });
-			// res.send(listMarks);
+			// res.send(listMarks);	
 			const updatedMarks = await Marks.findOneAndUpdate(
 				{ subjectId: req.params.subjectId, studentId: req.params.studentId },
 				{
