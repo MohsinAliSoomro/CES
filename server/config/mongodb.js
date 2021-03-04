@@ -3,9 +3,9 @@ function DatabaseConnection() {
 	mongoose
 		.connect(process.env.mongoDbURI, {
 			useNewUrlParser: true,
-			useFindAndModify: true,
+			useFindAndModify: false,
 			useUnifiedTopology: true,
-			useCreateIndex: true,
+			useCreateIndex: true
 		})
 		.then(() => console.log('database Connected'));
 }

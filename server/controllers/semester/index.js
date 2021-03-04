@@ -1,21 +1,26 @@
 const Semester = require('../../models/semester');
-
+const Program = require('../../models/program');
 exports.semester = {
 	createSemester: async (req, res) => {
-		const semester = await Semester(req.body);
-		await semester
-			.save()
-			.then((re) => {
-				res.send(semester);
-			})
-			.catch((er) => res.send(er));
+		try {
+			const semester = await Semester(req.body);
+			await semester.save();
+			await Program.findByIdAndUpdate(
+				{ _id: semester.programId },
+				{
+					$push: {
+						semestersId: semester._id
+					}
+				}
+			);
+		} catch (error) {}
 	},
 	semesters: async (req, res) => {
-		const semester = await Semester.find({});
+		const semester = await Semester.find({}).populate('programId');
 		res.send(semester);
 	},
 	semester: async (req, res) => {
-		const semester = await Semester.find({ _id: req.params.id });
+		const semester = await Semester.find({ _id: req.params.id }).populate('programId');
 		res.send(semester);
 	},
 	semesterProgram: async (req, res) => {

@@ -23,10 +23,12 @@ import MarksLedgerForm from 'components/MarksLedger/form';
 
 const MarksLedger = () => {
 	const [ student, setStudent ] = useState([]);
-	const [ subject, setSubject ] = useState();
+	const [subject, setSubject] = useState();
+	const [semester, setSemester] = useState();
+	const [ programsId, setSelectProgramId ] = useState('');
 	const [ mark, setMark ] = useState({ mrk: '', formId: '', subject: '' });
-
-	const form = [ { marks: '', formId: '', subjectId: '', studentId: '' } ];
+	console.log('ProgramId', programsId);
+	const form = [ { marks: '', formId: '', subjectId: '', studentId: '', programId: '', semesterId: '' } ];
 	const handleInput = (e, index, frm, studentId) => {
 		const mrk = form.map((i) => i.marks);
 		const fr = form.map((i) => i.formId);
@@ -44,16 +46,21 @@ const MarksLedger = () => {
 				marks: parseInt(e.target.value),
 				formId: frm,
 				subjectId: subject,
-				studentId: studentId
+				studentId: studentId,
+				programId: programsId,
+				semesterId:semester
 			});
 			console.log(form);
 		}
 	};
 
 	const handleSubmit = () => {
-		InsertMarks(form)
+		const removeFirstElement = form.filter((i) => i.marks !== '');
+
+		console.log('Total Element', removeFirstElement);
+		InsertMarks(removeFirstElement)
 			.then((res) => {
-				console.log('Result', res);
+				console.log('Result', res.data);
 				form.length = 0;
 			})
 			.catch((er) => alert(er));
@@ -69,7 +76,13 @@ const MarksLedger = () => {
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
 							<h2 className={styles.formHeading}>Marks Ledger Form</h2>
 							<ToastProvider>
-								<MarksLedgerForm setStudent={setStudent} setSubject={setSubject} type="Fresh" />
+								<MarksLedgerForm
+									setStudent={setStudent}
+									setSubject={setSubject}
+									type="Fresh"
+									setProgram={setSelectProgramId}
+									setSemester={setSemester}
+								/>
 							</ToastProvider>
 						</div>
 					</div>

@@ -51,7 +51,7 @@ const SubjectForm = () => {
 			religion: values.religion,
 			nationality: values.nationality,
 			address: values.address,
-			programId: selectPrgrm,
+			programId: values.Program,
 			district: values.district
 		})
 			.then((res) => {
@@ -72,14 +72,7 @@ const SubjectForm = () => {
 		values.Semester = '';
 		values.Type = '';
 	};
-	const selectProgram = (value) => {
-		setSelectProgram(value);
-		console.log(value);
-		// SemesterProgram(value).then((res) => {
-		// 	setSemester(res.data);
-		// 	console.log("semester=> ",res.data);
-		// });
-	};
+
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
 			<Form.Item
@@ -92,7 +85,7 @@ const SubjectForm = () => {
 					}
 				]}
 			>
-				<Select placeholder="Select the program" onChange={selectProgram} allowClear>
+				<Select placeholder="Select the program" allowClear>
 					{program.map((d) => {
 						return (
 							<Option key={d._id} value={d._id}>

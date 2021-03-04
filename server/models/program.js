@@ -8,7 +8,13 @@ const ProgramSchema = mongoose.Schema({
 	department: {
 		ref: 'department',
 		type: mongoose.Schema.Types.ObjectId
-	}
+	},
+	semestersId: [
+		{
+			ref: 'semester',
+			type: mongoose.Schema.Types.ObjectId
+		}
+	]
 });
 
 module.exports = mongoose.model('program', ProgramSchema);

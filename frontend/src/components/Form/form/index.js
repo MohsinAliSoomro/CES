@@ -35,8 +35,6 @@ const FormForm = () => {
 	useEffect(
 		() => {
 			dispatch(fetchAllPrograms());
-
-			dispatch(fetchAllSemester());
 		},
 		[ dispatch ]
 	);
@@ -139,17 +137,14 @@ const FormForm = () => {
 					placeholder="Select the program"
 					allowClear
 				>
-					{subject.length === 0 ? (
-						<div>Loading...</div>
-					) : (
+					{subject.length > 0 &&
 						subject[0].map((s) => {
 							return (
 								<Option key={s._id} value={s._id}>
 									{s.name}
 								</Option>
 							);
-						})
-					)}
+						})}
 				</Select>
 			</Form.Item>
 

@@ -15,7 +15,6 @@ import {
 	UncontrolledDropdown,
 	DropdownToggle,
 	Media,
-
 	Table,
 	Container,
 	Row
@@ -24,14 +23,16 @@ import { ToastProvider } from 'react-toast-notifications';
 // core components
 import Header from 'components/Headers/Header.js';
 
-
 const Student = () => {
 	const dispatch = useDispatch();
 	const students = useSelector((state) => state.student.students);
-	useEffect(() => {
-		dispatch(fetchAllStudent());
-	
-	}, [dispatch]);
+	console.log(students)
+	useEffect(
+		() => {
+			dispatch(fetchAllStudent());
+		},
+		[ dispatch ]
+	);
 	return (
 		<React.Fragment>
 			<Header />
@@ -74,8 +75,8 @@ const Student = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{students.length === 0 ? (
-										<div>Loading....</div>
+									{/* {students.length === 0 ? (
+										<div>Load	ing...</div>
 									) : (
 										students[0].map((pro) => {
 											return (
@@ -148,7 +149,7 @@ const Student = () => {
 												</tr>
 											);
 										})
-									)}
+									)} */}
 								</tbody>
 							</Table>
 							<CardFooter className="py-4">

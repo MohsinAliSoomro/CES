@@ -23,7 +23,7 @@ const tailLayout = {
 	}
 };
 
-const FormForm = ({ setStudent, setSubject, type }) => {
+const FormForm = ({ setStudent, setSubject, type,setProgram ,setSemester}) => {
 	const { addToast } = useToasts();
 	const subject = useSelector((state) => state.subject.subjects);
 	const semester = useSelector((state) => state.semester.semesters);
@@ -37,6 +37,7 @@ const FormForm = ({ setStudent, setSubject, type }) => {
 		[ dispatch ]
 	);
 	const onFinish = (values) => {
+		
 		fromSearch({
 			programId: values.Program,
 			subjectId: values.Subject,
@@ -44,6 +45,8 @@ const FormForm = ({ setStudent, setSubject, type }) => {
 			type: type
 		})
 			.then((res) => {
+				setProgram(values.Program)
+				setSemester(values.Semester)
 				setStudent(res.data);
 				console.log(res.data);
 
@@ -88,7 +91,7 @@ const FormForm = ({ setStudent, setSubject, type }) => {
 					{
 						required: true
 					}
-				]}
+		 		]}
 			>
 				<Select placeholder="Select the program" onChange={handleProgram} allowClear>
 					{program.length > 0 &&
