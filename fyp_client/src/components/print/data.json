@@ -1,6 +1,7 @@
 {
+  "id":"2134123412fasdfasdf",
   "session": "2020",
-  "rollno": "17-bsit-010",
+  "rollno": "17-BSIT-010",
   "department": "Computer Science",
   "program": "BS IT",
   "studentName": "Muhammad Aasim",
@@ -14,19 +15,19 @@
       "name": "English Composition & Comprehension",
       "credithr": 3,
       "type": "TH",
-      "marks": 90
+      "marks": 72
     },
     {
       "name": "Pakistan Studies",
       "credithr": 3,
       "type": "TH",
-      "marks": 87
+      "marks": 75
     },
     {
       "name": "Elementary Mathematics",
       "credithr": 3,
       "type": "TH",
-      "marks": 87
+      "marks": 72
     },
     {
       "name": "Introduction to Computing",
@@ -38,7 +39,7 @@
       "name": "Introduction to Computing",
       "credithr": 1,
       "type": "PR",
-      "marks": 50
+      "marks": 43
     },
     {
       "name": "Programming Fundamentals",
@@ -50,7 +51,7 @@
       "name": "Programming Fundamentals",
       "credithr": 1,
       "type": "PR",
-      "marks": 50
+      "marks": 40
     }
   ]
 }

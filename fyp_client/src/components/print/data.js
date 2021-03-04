@@ -1,13 +1,15 @@
 import React from "react";
 import "./style.scss";
 import data from "./data.json";
+import QRCode from 'qrcode.react';
 export class ComponentToPrint extends React.PureComponent {
   render() {
-    var totSub = 0;
-    var gp = 0;
-
+    let totSub = 0;
+    let gp = 0;
+    let gpa=0;
+    let qrcode=` Roll No : ${data.rollno} \n Name :  ${data.studentName}  \n Programme : ${data.program} \n Semester : ${data.semester}  \n Session: ${data.session}  \n Exam Type : ${data.papertype}  `
     function calcgp(obt, tot) {
-      var obtper = (obt * 100) / tot;
+      let obtper = (obt * 100) / tot;
       if (obtper >= 87) {
         return 4.0;
       } else if (obtper >= 85.5) {
@@ -116,7 +118,7 @@ export class ComponentToPrint extends React.PureComponent {
                     colSpan="3"
                     className="tdata"
                   >
-                    Blow 60 --- Fail
+                    Below 60 --- Fail
                   </td>
                 </tr>
               </tbody>
@@ -141,7 +143,7 @@ export class ComponentToPrint extends React.PureComponent {
           </div>
           {/* Name  */}
           <p>
-            {data.gender === 0 ? <span>Mr.</span> : <span>Miss.</span>}{" "}
+            {data.gender === 0 ? <span>Mr.</span> : <span>Miss.</span>}
             {data.studentName}
           </p>
         </div>
@@ -169,23 +171,26 @@ export class ComponentToPrint extends React.PureComponent {
                 </td>
                 <td>
                   {m.type === "TH" ? calcgp(m.marks, 100) : calcgp(m.marks, 50)}{" "}
-                </td>
+                </td >
+                <td style={{display:'none'}}>
                 {
                   (totSub++,
                   (gp +=
                     m.type == "TH"
                       ? calcgp(m.marks, 100)
                       : calcgp(m.marks, 50)))
-                }
+                }</td>
                 {}
               </tr>
             ))}
             <tr>
-              <td>GPA</td> <td>{(gp / totSub).toFixed(2)}</td>
+              <td>GPA</td> <td>{(gpa = gp / totSub).toFixed(2)}</td>
+              <td style={{display:'none'}}>{qrcode+=`\n GPA : ${gpa.toFixed(2)} `}</td>
             </tr>
           </tbody>
         </table>
-      </div>
+                   <QRCode value={qrcode}/>
+          </div>
     );
   }
 }
