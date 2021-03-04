@@ -17,7 +17,7 @@ exports.subject = {
 	subject: async (req, res) => {
 		const subject = await Subject.find({ _id: req.params.id }).populate('semesterId');
 		res.send(subject);
-	},
+	} ,
 	subjectSemester: async (req, res) => {
 		const subject = await Subject.find({ semesterId: req.params.id }).populate('semesterId');
 		res.send(subject);

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const StudentSchema = mongoose.Schema({
+	rollno: {
+		type: String,
+		required: [ true, 'Roll No required' ]
+	},
 	firstName: {
 		type: String,
 		required: true
@@ -25,7 +29,7 @@ const StudentSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	address: {	
+	address: {
 		type: String,
 		required: true
 	},

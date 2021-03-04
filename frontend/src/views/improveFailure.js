@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Program.module.css';
-import axios from 'axios';
-import { InsertMarks } from '../functions/marks';
+
+import { UpdateMarks } from '../functions/marks';
 import {
 	Badge,
 	Card,
@@ -14,50 +14,37 @@ import {
 	Media,
 	Table,
 	Container,
-	Row
+	Row,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+	Button
 } from 'reactstrap';
 import { ToastProvider } from 'react-toast-notifications';
 // core components
 import Header from 'components/Headers/Header.js';
 import MarksLedgerForm from 'components/MarksLedger/form';
 
-const MarksLedger = () => {
+const ImproveFailure = () => {
 	const [ student, setStudent ] = useState([]);
 	const [ subject, setSubject ] = useState();
-	const [ mark, setMark ] = useState({ mrk: '', formId: '', subject: '' });
+	const [ isOpen, setIsOpen ] = useState({ isOpen: false, studentId: '', subjectId: '', formId: '' });
 
-	const form = [ { marks: '', formId: '', subjectId: '', studentId: '' } ];
-	const handleInput = (e, index, frm, studentId) => {
-		const mrk = form.map((i) => i.marks);
-		const fr = form.map((i) => i.formId);
-		const sb = form.map((i) => i.subjectId);
-		if (mrk !== '' && fr !== '' && sb !== '') {
-			for (let i = 0; i < fr.length; i++) {
-				const element = fr[i];
-				if (frm === element) {
-					const findIndex = form.findIndex((obj) => obj.formId === element);
-					form[findIndex].marks = parseInt(e.target.value);
-					return;
-				}
-			}
-			form.push({
-				marks: parseInt(e.target.value),
-				formId: frm,
-				subjectId: subject,
-				studentId: studentId
-			});
-			console.log(form);
-		}
-	};
+	const [ updatedMarks, setUpdatedMarks ] = useState(0);
+	const form = [ { marks: '', formId: '', subjectId: '' } ];
 
-	const handleSubmit = () => {
-		InsertMarks(form)
+	const handelUpdateMarks = (e) => {
+		e.preventDefault();
+		const data = { formId: isOpen.formId, marks: updatedMarks };
+		UpdateMarks(isOpen.subjectId, isOpen.studentId, data)
 			.then((res) => {
-				console.log('Result', res);
+				alert('Marks Added');
 				form.length = 0;
 			})
 			.catch((er) => alert(er));
 	};
+
 	return (
 		<React.Fragment>
 			<Header />
@@ -69,7 +56,11 @@ const MarksLedger = () => {
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
 							<h2 className={styles.formHeading}>Marks Ledger Form</h2>
 							<ToastProvider>
-								<MarksLedgerForm setStudent={setStudent} setSubject={setSubject} type="Fresh" />
+								<MarksLedgerForm
+									setStudent={setStudent}
+									setSubject={setSubject}
+									type="Improve/Failure"
+								/>
 							</ToastProvider>
 						</div>
 					</div>
@@ -121,21 +112,20 @@ const MarksLedger = () => {
 														</Media>
 													</th>
 													<td>{pro.studentId.lastName}</td>
+
 													<td>
-														<input
-															type="number"
-															value={mark.mrk[index]}
-															onBlur={(e) =>
-																handleInput(e, index, pro._id, pro.studentId._id)}
-														/>
-													</td>
-													{/* <td>{pro.creditHour}</td>
-                                                    <td>{pro.semesterId.name}</td> */}
-													<td>
-														<Badge color="" className="badge-dot mr-4">
-															<i className={'bg-success'} />
-															active
-														</Badge>
+														<Button
+															color="secondary"
+															onClick={() =>
+																setIsOpen({
+																	isOpen: true,
+																	studentId: pro.studentId._id,
+																	subjectId: subject,
+																	formId: pro._id
+																})}
+														>
+															Marks
+														</Button>
 													</td>
 													<td>121</td>
 													<td className="text-right">
@@ -167,15 +157,33 @@ const MarksLedger = () => {
 							</Table>
 							<CardFooter className="py-4">
 								<nav aria-label="..." />
-								<button onClick={handleSubmit}>Save</button>
 							</CardFooter>
 						</Card>
 					</div>
 				</Row>
 				{/* Dark table */}
+				<Modal isOpen={isOpen.isOpen} toggle={() => setIsOpen({ isOpen: false })}>
+					<ModalHeader toggle={() => setIsOpen(!isOpen)}>Improve Marks</ModalHeader>
+					<ModalBody>
+						<h1>update Marks</h1>
+						<form onSubmit={handelUpdateMarks}>
+							<input
+								type="number"
+								value={updatedMarks}
+								onChange={(e) => setUpdatedMarks(e.target.value)}
+							/>
+							<button>Submit</button>
+						</form>
+					</ModalBody>
+					<ModalFooter>
+						<Button color="primary" onClick={() => setIsOpen({ isOpen: false })}>
+							Cancel
+						</Button>
+					</ModalFooter>
+				</Modal>
 			</Container>
 		</React.Fragment>
 	);
 };
 
-export default MarksLedger;
+export default ImproveFailure;

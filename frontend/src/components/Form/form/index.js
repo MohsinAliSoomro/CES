@@ -37,7 +37,6 @@ const FormForm = () => {
 			dispatch(fetchAllPrograms());
 
 			dispatch(fetchAllSemester());
-			
 		},
 		[ dispatch ]
 	);
@@ -65,16 +64,13 @@ const FormForm = () => {
 	};
 	const handleProgram = (value) => {
 		dispatch(fetchAllSemester(value));
-		dispatch(fetchAllStudent(value))
+		dispatch(fetchAllStudent(value));
 	};
 	const handleSemester = (value) => {
 		dispatch(fetchAllSubject(value));
 	};
 	const handleSubjects = (value) => {
 		setSelectedSubject(value);
-	};
-	const handleStudent = (value) => {
-		dispatch(fetchAllStudent());
 	};
 
 	return (
@@ -139,7 +135,6 @@ const FormForm = () => {
 					mode="multiple"
 					allowClear
 					style={{ width: '100%' }}
-					placeholder="Please select"
 					onChange={handleSubjects}
 					placeholder="Select the program"
 					allowClear
