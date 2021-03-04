@@ -23,7 +23,12 @@ const MarksSchema = mongoose.Schema(
 		studentId: {
 			ref: 'student',
 			type: mongoose.Schema.Types.ObjectId,
-			required:true,
+			required: true
+		},
+		semesterId: {
+			ref: 'semester',
+			type: mongoose.Schema.Types.ObjectId,
+			required: true
 		}
 	},
 	{ timestamps: true }
