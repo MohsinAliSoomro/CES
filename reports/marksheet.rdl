@@ -40,10 +40,10 @@
             </Paragraphs>
           </Textbox>
           <Tablix Name="Tablix2">
-            <Left>177pt</Left>
+            <Left>243pt</Left>
             <Top>142.5pt</Top>
             <Height>54pt</Height>
-            <Width>432pt</Width>
+            <Width>288pt</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -52,12 +52,6 @@
             <DataSetName>DataSet1</DataSetName>
             <TablixBody>
               <TablixColumns>
-                <TablixColumn>
-                  <Width>72pt</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>72pt</Width>
-                </TablixColumn>
                 <TablixColumn>
                   <Width>72pt</Width>
                 </TablixColumn>
@@ -99,80 +93,6 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Subject Name</Value>
-                                  <Style>
-                                    <Color>black</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                        </Textbox>
-                        <ColSpan>1</ColSpan>
-                        <RowSpan>1</RowSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="TextBox9">
-                          <Left>0in</Left>
-                          <Top>0in</Top>
-                          <Height>18pt</Height>
-                          <Width>72pt</Width>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                          </Style>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Credit HR</Value>
-                                  <Style>
-                                    <Color>black</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                        </Textbox>
-                        <ColSpan>1</ColSpan>
-                        <RowSpan>1</RowSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="TextBox28">
-                          <Left>0in</Left>
-                          <Top>0in</Top>
-                          <Height>18pt</Height>
-                          <Width>72pt</Width>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                          </Style>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Type</Value>
                                   <Style>
                                     <Color>black</Color>
                                   </Style>
@@ -339,78 +259,6 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TextBox12">
-                          <Left>0in</Left>
-                          <Top>0in</Top>
-                          <Height>18pt</Height>
-                          <Width>72pt</Width>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                          </Style>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!credithr.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                        </Textbox>
-                        <ColSpan>1</ColSpan>
-                        <RowSpan>1</RowSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="TextBox29">
-                          <Left>0in</Left>
-                          <Top>0in</Top>
-                          <Height>18pt</Height>
-                          <Width>72pt</Width>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                          </Style>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!type.Value</Value>
-                                  <Style>
-                                    <Color>black</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                        </Textbox>
-                        <ColSpan>1</ColSpan>
-                        <RowSpan>1</RowSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="markss">
                           <Left>0in</Left>
                           <Top>0in</Top>
@@ -562,80 +410,6 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TextBox25">
-                          <Left>0in</Left>
-                          <Top>0in</Top>
-                          <Height>18pt</Height>
-                          <Width>72pt</Width>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                          </Style>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Avg(Fields!credithr.Value)</Value>
-                                  <Style>
-                                    <Color>black</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                        </Textbox>
-                        <ColSpan>1</ColSpan>
-                        <RowSpan>1</RowSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="TextBox30">
-                          <Left>0in</Left>
-                          <Top>0in</Top>
-                          <Height>18pt</Height>
-                          <Width>72pt</Width>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                          </Style>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <Color>black</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                        </Textbox>
-                        <ColSpan>1</ColSpan>
-                        <RowSpan>1</RowSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="TextBox26">
                           <Left>0in</Left>
                           <Top>0in</Top>
@@ -716,6 +490,7 @@
                           <Height>18pt</Height>
                           <Width>72pt</Width>
                           <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -733,11 +508,20 @@
                                 <TextRun>
                                   <Value>=Avg(IIF(Fields!type.Value="TH",iif((Fields!marks.Value*100/100)&gt;=87,"4.00",iif((Fields!marks.Value*100/100)&gt;=85.5,"3.90",iif((Fields!marks.Value*100/100)&gt;=84,"3.80",iif((Fields!marks.Value*100/100)&gt;=82.5,"3.70",iif((Fields!marks.Value*100/100)&gt;=81,"3.60",iif((Fields!marks.Value*100/100)&gt;=79.5,"3.50",iif((Fields!marks.Value*100/100)&gt;=78,"3.40",iif((Fields!marks.Value*100/100)&gt;=76.5,"3.30",iif((Fields!marks.Value*100/100)&gt;=75,"3.20",iif((Fields!marks.Value*100/100)&gt;=73.5,"3.10",iif((Fields!marks.Value*100/100)&gt;=72,"3.00",iif((Fields!marks.Value*100/100)&gt;=70.5,"2.87",iif((Fields!marks.Value*100/100)&gt;=69,"2.75",iif((Fields!marks.Value*100/100)&gt;=67.5,"2.62",iif((Fields!marks.Value*100/100)&gt;=66,"2.50",iif((Fields!marks.Value*100/100)&gt;=64.5,"2.37",iif((Fields!marks.Value*100/100)&gt;=63,"2.25",iif((Fields!marks.Value*100/100)&gt;=61.5,"2.12",iif((Fields!marks.Value*100/100)&gt;=60,"2.00","0.0"))))))))))))))))))), iif((Fields!marks.Value*100/50)&gt;=87,"4.00",iif((Fields!marks.Value*100/50)&gt;=85.5,"3.90",iif((Fields!marks.Value*100/50)&gt;=84,"3.80",iif((Fields!marks.Value*100/50)&gt;=82.5,"3.70",iif((Fields!marks.Value*100/50)&gt;=81,"3.60",iif((Fields!marks.Value*100/50)&gt;=79.5,"3.50",iif((Fields!marks.Value*100/50)&gt;=78,"3.40",iif((Fields!marks.Value*100/50)&gt;=76.5,"3.30",iif((Fields!marks.Value*100/50)&gt;=75,"3.20",iif((Fields!marks.Value*100/50)&gt;=73.5,"3.10",iif((Fields!marks.Value*100/50)&gt;=72,"3.00",iif((Fields!marks.Value*100/50)&gt;=70.5,"2.87",iif((Fields!marks.Value*100/50)&gt;=69,"2.75",iif((Fields!marks.Value*100/50)&gt;=67.5,"2.62",iif((Fields!marks.Value*100/50)&gt;=66,"2.50",iif((Fields!marks.Value*100/50)&gt;=64.5,"2.37",iif((Fields!marks.Value*100/50)&gt;=63,"2.25",iif((Fields!marks.Value*100/50)&gt;=61.5,"2.12",iif((Fields!marks.Value*100/50)&gt;=60,"2.00","0.0")))))))))))))))))))))</Value>
                                   <Style>
+                                    <Format>0.00;(0.00)</Format>
+                                    <FormatType xmlns="http://tempuri.org/">
+                                      <Format>Number</Format>
+                                      <Representation>None</Representation>
+                                      <NegativeValue>(12345)</NegativeValue>
+                                      <Culture />
+                                    </FormatType>
                                     <Color>black</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                         </Textbox>
@@ -751,8 +535,6 @@
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
-                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -779,7 +561,7 @@
         </ReportItems>
         <Height>363.75pt</Height>
       </Body>
-      <Width>610.5pt</Width>
+      <Width>676.5pt</Width>
       <Page>
         <PageFooter>
           <Style>
