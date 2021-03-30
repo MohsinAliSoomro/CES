@@ -1,0 +1,23 @@
+.tdata{
+    width: 200px;
+}
+table {
+    tbody{
+        tr{
+            text-align: center; 
+            td {
+                border: 1px solid black;
+                width: 200px;
+                font-size: 14px;    
+            }
+            td:first-child {
+                width: 500px;
+                text-align: left;
+            }
+        }
+    }
+}
+.container{
+    padding:50px;
+  
+}

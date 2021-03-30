@@ -8,6 +8,7 @@ import Student from 'views/Student.js'
 import Form from 'views/Form.js'
 import MarksLedger from "views/MarksLedger";
 import ImproveFailure from "views/improveFailure";
+import PrintComponent from 'views/report/printComponent'
 var routes = [
   {
     path: "/index",
@@ -71,6 +72,13 @@ var routes = [
     icon: "ni ni-key-25 text-info",
     component: Login,
     layout: "/auth",
+  },
+  {
+    path: "/report",
+    name: "report",
+    icon: "ni ni-key-25 text-info",
+    component: PrintComponent,
+    layout: "/admin",
   },
   {
     path: "/register",
