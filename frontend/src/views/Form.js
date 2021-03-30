@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './Program.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllSubject } from './FormSlice';
-
+import { useHistory} from 'react-router-dom';
 import {
 	Badge,
 	Card,
@@ -25,14 +25,18 @@ import FormForm from 'components/Form/form';
 const Form = () => {
 	const dispatch = useDispatch();
 	const subject = useSelector((state) => state.subject.subjects);
-	console.log('Subject=>', subject);
+	const history = useHistory();
 	useEffect(
 		() => {
 			dispatch(fetchAllSubject());
+			if (localStorage.getItem("user")===null) {
+				history.push('/auth/login')
+			}
 		},
 		[ dispatch ]
 	);
-	console.log(subject)
+	
+	
 	return (
 		<React.Fragment>
 			<Header />
@@ -71,7 +75,8 @@ const Form = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{subject.length > 0 && subject[0].length > 0 &&
+									{subject.length > 0 &&
+										subject[0].length > 0 &&
 										subject[0].map((pro) => {
 											return (
 												<tr key={pro._id}>

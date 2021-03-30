@@ -33,6 +33,8 @@ app.use('/form', form);
 //marks routes
 const marks = require('./routes/marks');
 app.use('/marks', marks);
+const user = require('./routes/user');
+app.use('/user', user);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Server Running on Port ${process.env.PORT} `);

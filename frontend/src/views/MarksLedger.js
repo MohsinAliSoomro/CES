@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styles from './Program.module.css';
-import axios from 'axios';
+import {useHistory }from 'react-router-dom'
 import { InsertMarks } from '../functions/marks';
 import {
 	Badge,
@@ -65,6 +65,12 @@ const MarksLedger = () => {
 			})
 			.catch((er) => alert(er));
 	};
+	const history = useHistory();
+	useEffect(() => {
+		if (localStorage.getItem("user") === null) {
+			history.push('/auth/login')
+		}
+	},[])
 	return (
 		<React.Fragment>
 			<Header />

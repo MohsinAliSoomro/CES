@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Program.module.css';
-
+import { useHistory} from 'react-router-dom';
 import { UpdateMarks } from '../functions/marks';
 import {
 	Badge,
@@ -33,7 +33,12 @@ const ImproveFailure = () => {
 
 	const [ updatedMarks, setUpdatedMarks ] = useState(0);
 	const form = [ { marks: '', formId: '', subjectId: '' } ];
-
+	const history = useHistory();
+	useEffect(() => {
+		if (localStorage.getItem("user") === null) {
+			history.push('/auth/login')
+		}
+	},[])
 	const handelUpdateMarks = (e) => {
 		e.preventDefault();
 		const data = { formId: isOpen.formId, marks: updatedMarks };
@@ -44,6 +49,8 @@ const ImproveFailure = () => {
 			})
 			.catch((er) => alert(er));
 	};
+	
+	
 
 	return (
 		<React.Fragment>

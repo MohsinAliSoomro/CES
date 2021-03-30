@@ -54,7 +54,8 @@ const SubjectForm = ({setStudents}) => {
 			nationality: values.nationality,
 			address: values.address,
 			programId: values.Program,
-			district: values.district
+			district: values.district,
+			gender:values.gender
 		})
 			.then((res) => {
 				// dispatch(fetchAllStudent());
@@ -157,6 +158,18 @@ const SubjectForm = ({setStudents}) => {
 					{
 						required: true,
 						message: 'Please input your surname'
+					}
+				]}
+			>
+				<Input />
+			</Form.Item>
+			<Form.Item
+				label="Gender"
+				name="gender"
+				rules={[
+					{
+						required: true,
+						message: 'Please input your gender'
 					}
 				]}
 			>

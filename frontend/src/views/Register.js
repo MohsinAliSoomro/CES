@@ -1,6 +1,6 @@
 
-import React from "react";
-
+import React,{useEffect} from "react";
+import {useHistory} from 'react-router-dom'
 // reactstrap components
 import {
   Button,
@@ -17,6 +17,12 @@ import {
 } from "reactstrap";
 
 const Register = () => {
+  const history = useHistory();
+	useEffect(() => {
+		if (localStorage.getItem("user") === null) {
+			history.push('/auth/login')
+		}
+	},[])
   return (
     <>
       <Col lg="6" md="8">

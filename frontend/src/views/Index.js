@@ -1,10 +1,11 @@
 
-import React from "react";
+import React,{useEffect} from "react";
 // node.js library that concatenates classes (strings)
 // javascipt plugin for creating charts
 import Chart from "chart.js";
 // react plugin used to create charts
 // reactstrap components
+import {useHistory} from 'react-router-dom'
 import {
 
   Container,
@@ -21,6 +22,12 @@ import Header from "../components/Headers/Header.js";
 
 const Index = (props) => {
 
+  const history = useHistory();
+	useEffect(() => {
+		if (localStorage.getItem("user") === null) {
+			history.push('/auth/login')
+		}
+	},[])
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
   }

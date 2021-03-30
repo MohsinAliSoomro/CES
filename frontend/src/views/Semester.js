@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect}from 'react';
 import SemesterForm from '../components/Form/semester';
 import styles from './Program.module.css';
+import {useHistory} from 'react-router-dom'
 // reactstrap components
 import {
 	Card,
@@ -16,6 +17,12 @@ import Header from 'components/Headers/Header.js';
 import SubjectForm from 'components/Form/subject';
 
 const Program = () => {
+	const history = useHistory();
+	useEffect(() => {
+		if (localStorage.getItem("user") === null) {
+			history.push('/auth/login')
+		}
+	},[])
 	return (
 		<React.Fragment>
 			<Header />
