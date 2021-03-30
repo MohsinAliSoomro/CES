@@ -31,7 +31,9 @@ exports.marks = {
 			const listMarks = await Marks.find({ studentId: req.params.studentId })
 				.populate('formId')
 				.populate('subjectId')
-				.populate('studentId');
+				.populate('studentId')
+				.populate('programId')
+				.populate('semesterId');
 			res.send(listMarks);
 		} catch (error) {
 			res.json({ message: 'Something error in list of marks' });

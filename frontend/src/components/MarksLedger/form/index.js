@@ -23,7 +23,7 @@ const tailLayout = {
 	}
 };
 
-const FormForm = ({ setStudent, setSubject, type,setProgram ,setSemester}) => {
+const FormForm = ({ setStudent, setSubject, type, setProgram, setSemester }) => {
 	const { addToast } = useToasts();
 	const subject = useSelector((state) => state.subject.subjects);
 	const semester = useSelector((state) => state.semester.semesters);
@@ -37,7 +37,6 @@ const FormForm = ({ setStudent, setSubject, type,setProgram ,setSemester}) => {
 		[ dispatch ]
 	);
 	const onFinish = (values) => {
-		
 		fromSearch({
 			programId: values.Program,
 			subjectId: values.Subject,
@@ -45,15 +44,23 @@ const FormForm = ({ setStudent, setSubject, type,setProgram ,setSemester}) => {
 			type: type
 		})
 			.then((res) => {
-				setProgram(values.Program)
-				setSemester(values.Semester)
-				setStudent(res.data);
-				console.log(res.data);
+				setProgram(values.Program);
+				setSemester(values.Semester);
+				if (res.data.length === 0) {
+					addToast(` form not found `, {
+						appearance: 'error',
+						autoDismiss: true
+					});
+				}
 
-				addToast(`${values.Program} Added successfully...`, {
-					appearance: 'success',
-					autoDismiss: true
-				});
+				if (res.data.length >0) {
+					setStudent(res.data);
+					addToast(` form loading `, {
+						appearance: 'success',
+						autoDismiss: true
+					});
+				}
+				console.log(res.data);
 			})
 			.catch((err) => {
 				addToast(err.message, {
@@ -91,7 +98,7 @@ const FormForm = ({ setStudent, setSubject, type,setProgram ,setSemester}) => {
 					{
 						required: true
 					}
-		 		]}
+				]}
 			>
 				<Select placeholder="Select the program" onChange={handleProgram} allowClear>
 					{program.length > 0 &&
@@ -141,7 +148,8 @@ const FormForm = ({ setStudent, setSubject, type,setProgram ,setSemester}) => {
 					allowClear
 					onChange={handleSubject}
 				>
-					{subject.length > 0 && subject[0].length > 0 &&
+					{subject.length > 0 &&
+						subject[0].length > 0 &&
 						subject[0].map((s) => {
 							return (
 								<Option key={s._id} value={s._id}>

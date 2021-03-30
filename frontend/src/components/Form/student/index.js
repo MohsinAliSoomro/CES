@@ -173,7 +173,10 @@ const SubjectForm = ({setStudents}) => {
 					}
 				]}
 			>
-				<Input />
+				<Select>
+					<Option value="Male">Male</Option>
+					<Option value="Female">Female</Option>
+				</Select>
 			</Form.Item>
 			<Form.Item
 				label="Religion"

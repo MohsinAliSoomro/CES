@@ -1,7 +1,8 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Program.module.css';
-import {useHistory }from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import { InsertMarks } from '../functions/marks';
+import { useToasts } from 'react-toast-notifications';
 import {
 	Badge,
 	Card,
@@ -23,10 +24,11 @@ import MarksLedgerForm from 'components/MarksLedger/form';
 
 const MarksLedger = () => {
 	const [ student, setStudent ] = useState([]);
-	const [subject, setSubject] = useState();
-	const [semester, setSemester] = useState();
+	const [ subject, setSubject ] = useState();
+	const [ semester, setSemester ] = useState();
 	const [ programsId, setSelectProgramId ] = useState('');
 	const [ mark, setMark ] = useState({ mrk: '', formId: '', subject: '' });
+	const { addToast } = useToasts();
 	console.log('ProgramId', programsId);
 	const form = [ { marks: '', formId: '', subjectId: '', studentId: '', programId: '', semesterId: '' } ];
 	const handleInput = (e, index, frm, studentId) => {
@@ -48,7 +50,7 @@ const MarksLedger = () => {
 				subjectId: subject,
 				studentId: studentId,
 				programId: programsId,
-				semesterId:semester
+				semesterId: semester
 			});
 			console.log(form);
 		}
@@ -61,16 +63,28 @@ const MarksLedger = () => {
 		InsertMarks(removeFirstElement)
 			.then((res) => {
 				console.log('Result', res.data);
-				form.length = 0;
+				if (res.data.length > 0) {
+					form.marks = '';
+				form.formId = '';
+				form.subjectId = '';
+				form.studentId = '';
+				form.programId = '';
+				form.semesterId = '';
+				addToast(` Data Added`, {
+					appearance: 'success',
+					autoDismiss: true
+				});
+				}
+				
 			})
 			.catch((er) => alert(er));
 	};
 	const history = useHistory();
 	useEffect(() => {
-		if (localStorage.getItem("user") === null) {
-			history.push('/auth/login')
+		if (localStorage.getItem('user') === null) {
+			history.push('/auth/login');
 		}
-	},[])
+	}, []);
 	return (
 		<React.Fragment>
 			<Header />
