@@ -5,31 +5,43 @@ import QRCode from 'qrcode.react';
 export default class ComponentToPrint extends Component {
 	constructor(props) {
 		super(props);
-		console.log("class Components",this.props.data)
+		
 		this.state={
 			result: []
 		}
 	}
 	
-// 	componentDidMount() {
-// console.log(this.props)
-// 		fetch('http://localhost:4000/marks/marksStudent/6041241912ad281dace9e4e3')
-// 			.then((js) => js.json())
-// 			.then((res) => {
-// 				this.setState({result:res})
-// 				 console.log(res)
-// 			});
-// 	}
+	componentDidMount() {
+		if (this.props.data) {
+			fetch(`http://localhost:4000/marks/marksStudent/${this.props.data.studentId._id}`)
+			.then((js) => js.json())
+				.then((res) => {
+					console.log(res)
+					if (res) {
+						this.setState({result:res}) 
+					}
+				
+			});
+		}
+		
+	}
 	
 	render() {
 		if (!this.props) {
 			return <div>Loading...</div>
 		}
-		
+		for (let i = 0; i < this.state.result.length; i++) {
+			const element = this.state.result[i];
+			console.log("element",element._id===this.props.data._id)
+			
+		}
+		const filterData= this.state.result.filter(i=>i.studentId._id===this.props.data.studentId._id)
+		console.log("props",filterData.map(i=>i.studentId))
+		// console.log("result",this.state.result[this.props.data._id])
 		let totSub = 0;
 		let gp = 0;
 		let gpa = 0;
-		// let qrcode = ` Roll No : ${this.props.data[0].studentId.rollno} \n Name :  ${ this.props.data[0].studentId.firstName}  \n Programme : ${this.props.data[0].programId.name} \n Semester : ${this.props.data[0].semesterId.name}  \n Session: ${this.props.data[0].createdAt.slice(0,4)}  \n Exam Type : ${this.props.data[0].subjectId.type}  `;
+		// let qrcode = ` Roll No : ${this.state.result[0].studentId.rollno} \n Name :  ${ this.props.data[0].studentId.firstName}  \n Programme : ${this.props.data[0].programId.name} \n Semester : ${this.props.data[0].semesterId.name}  \n Session: ${this.props.data[0].createdAt.slice(0,4)}  \n Exam Type : ${this.props.data[0].subjectId.type}  `;
 		function calcgp(obt, tot) {
 			let obtper = obt * 100 / tot;
 			if (obtper >= 87) {
@@ -89,9 +101,10 @@ export default class ComponentToPrint extends Component {
 		// if (!result) {
 		// 	return <div>Loading....</div>;
 		// }
-		console.log(this.props)
+	
 		return (
 			<div className={styles.container}>
+				
 			<div style={{ position: 'relative' }}>
 				<div style={{ position: 'absolute', top: '50%', left: '90%' }}>
 					<h1>Absolute</h1>
@@ -160,7 +173,8 @@ export default class ComponentToPrint extends Component {
 							fontWeight: 'bolder',
 							fontSize: '30px'
 						}}
-					>
+						>
+							
 							{/* {this.props.data[0].programId.name} Studies */}
 						 {/* ({data.department}) {result[0].studentId.program} ( */}
 					{/* {data.pduration} Years) */}
@@ -170,10 +184,12 @@ export default class ComponentToPrint extends Component {
 						<p>Session {data.session}</p>
 					</div>
 					{/* Name  */}
-					<p>
-						{data.gender === "Male" ? <span>Mr.</span> : <span>Miss.</span>}
-						{this.props.data.studentId.firstName}{' '}
-						{this.props.data.studentId.lastName}
+						<p>
+							{/* {filterData && filterData[0].studentId.firstName} */}
+							{[...new Set(filterData.map(i=>i.studentId.firstName))]}
+						{/* {this.props.data && this.state.result[this.props.data._id].studentId.gender === "Male" ? <span>Mr.</span> : <span>Miss.</span>} */}
+						{/* {this.state.result[this.props.data.studentId._id].studentId.firstName}{' '}
+						{ this.state.result[this.props.data.studentId._id].studentId.lastName} */}
 					</p>
 				</div>
 				<table>
@@ -198,28 +214,28 @@ export default class ComponentToPrint extends Component {
 							})}
 							<td />
 						</tr> */}
-						{/* {this.props.data.map((sb) => {
-							return ( */}
+						{filterData.map((sb) => {
+							return (
 								<tr> 
-									 <td>{this.props.data.subjectId.name}</td>
-									<td>{this.props.data.creditHour}</td>
-									<td>{this.props.data.marks[0]}</td> 
+									 <td>{sb.subjectId.name}</td>
+									<td>{sb.subjectId.creditHour}</td>
+									<td>{sb.marks[0]}</td> 
 									 <td>
-										{this.props.data.subjectId.type === 'Theory' ? grade(this.props.data.marks[0], 100) : grade(this.props.data.marks[0], 50)}
+										{sb.subjectId.type === 'Theory' ? grade(sb.marks[0], 100) : grade(sb.marks[0], 50)}
 									</td>
 									<td>
-										{this.props.data.subjectId.type === 'Theory' ? (
-											calcgp(this.props.data.marks[0], 100)
+										{sb.subjectId.type === 'Theory' ? (
+											calcgp(sb.marks[0], 100)
 										) : (
-												calcgp(this.props.data.marks[0], 50)
+												calcgp(sb.marks[0], 50)
 											)}{' '}
 									</td>
 									<td style={{ display: 'none' }}>
-										{(totSub++, (gp += this.props.data.subjectId.type == 'Theory' ? calcgp(this.props.data.marks[0], 100) : calcgp(this.props.data.marks[0], 50)))}
+										{(totSub++, (gp += sb.subjectId.type == 'Theory' ? calcgp(sb.marks[0], 100) : calcgp(sb.marks[0], 50)))}
 									</td> 
 								 </tr>
-							{/* );
-						})} */}
+							 );
+						})} 
 						{/* <tr> 
 							<td><b>GPA</b></td> <td>{(gpa = gp / totSub).toFixed(2)}</td>
 							<td style={{ display: 'none' }}>{(qrcode += `\n GPA : ${gpa.toFixed(2)} `)}</td>

@@ -34,7 +34,7 @@ exports.marks = {
 	StudentMarks: async function(req, res) {
 		try {
 			const listMarks = await Marks.find({ studentId: req.params.studentId })
-				.populate('formId')
+				.populate('formId')	
 				.populate('subjectId')
 				.populate('studentId')
 				.populate('programId')

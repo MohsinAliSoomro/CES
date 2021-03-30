@@ -3,7 +3,6 @@ import ReactToPrint from 'react-to-print';
 
 import ComponentToPrint from './data';
 
-
 function PrintComponent() {
 	const [ student, setStudent ] = useState();
 	useEffect(() => {
@@ -12,7 +11,6 @@ function PrintComponent() {
 				return res.find((a) => a.studentId._id === id);
 			});
 			setStudent(uniqueAddresses);
-
 		});
 	}, []);
 	console.log('student', student);
@@ -30,11 +28,14 @@ function PrintComponent() {
 						student.map((std) => {
 							return (
 								<div key={std._id}>
-                                    <h2>{std.studentId.firstName}</h2>
-                                    <div style={{ marginTop: '200px' }}>
-				<ReactToPrint trigger={() => <button>Print This Out</button>} content={() => componentRef.current} />
-				<ComponentToPrint data={std} ref={componentRef} />
-			</div>
+									<h2>{std.studentId.firstName}</h2>
+									<div style={{ marginTop: '200px' }}>
+										<ReactToPrint
+                                            trigger={() => <button>Print This Out</button>}
+											content={() => componentRef.current}
+										/>
+										<ComponentToPrint data={std} ref={componentRef} />
+									</div>
 								</div>
 							);
 						})}
