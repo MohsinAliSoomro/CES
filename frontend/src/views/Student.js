@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import StudentForm from '../components/Form/student';
 import styles from './Program.module.css';
-
+import {useHistory} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllStudent } from './studentSlice';
 import { ListStudent, DeleteStudent, UpdateStudent } from '../functions/student';
@@ -108,7 +108,12 @@ e.preventDefault()
 			
 		})
 	};
-	console.log(editValue)
+	const history = useHistory();
+	useEffect(() => {
+		if (localStorage.getItem("user") === null) {
+			history.push('/auth/login')
+		}
+	},[])
 	return (
 		<React.Fragment>
 			<Header />

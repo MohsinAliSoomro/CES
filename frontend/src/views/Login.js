@@ -1,7 +1,9 @@
 
-import React from "react";
-
+import React, { useState } from "react";
+import {login} from '../functions/user'
 // reactstrap components
+import { useToasts } from 'react-toast-notifications';
+import {useHistory} from 'react-router-dom'
 import {
   Button,
   Card,
@@ -18,6 +20,41 @@ import {
 } from "reactstrap";
 
 const Login = () => {
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const { addToast } = useToasts()
+  const history = useHistory();
+  const handleLogin = (e) => {
+    e.preventDefault()
+    login({ email:email, password:password })
+      .then(res => {
+        if (res.data.message) {
+          addToast(` ${res.data.message}`, {
+            appearance: 'error',
+            autoDismiss: true
+          });
+        }
+        if (res.data.email) {
+          localStorage.setItem("user",res.data.email)
+          addToast(` login successful`, {
+            appearance: 'success',
+            autoDismiss: true
+          });
+          history.push('/admin/index')
+       }
+      
+        console.log("response", res.data)
+      })
+      .catch(er => {
+        addToast(` ${er.message}`, {
+					appearance: 'error',
+					autoDismiss: true
+				});
+        console.log("error",er)
+      })
+  }
+  console.log("user",localStorage.getItem("user"))
+  console.log({email,password})
   return (
     <>
       <Col lg="5" md="7">
@@ -29,7 +66,7 @@ const Login = () => {
             <div className="text-center text-muted mb-4">
               {/* <small>sign in with credentials</small> */}
             </div>
-            <Form role="form">
+            <Form role="form" >
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -40,6 +77,8 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
                     autoComplete="new-email"
                   />
                 </InputGroup>
@@ -54,6 +93,8 @@ const Login = () => {
                   <Input
                     placeholder="Password"
                     type="password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
                     autoComplete="new-password"
                   />
                 </InputGroup>
@@ -72,7 +113,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button onClick={handleLogin} className="my-4" color="primary" type="button">
                   Sign in
                 </Button>
               </div>

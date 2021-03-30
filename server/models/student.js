@@ -37,6 +37,10 @@ const StudentSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	gender: {
+		type: String,
+		required: true
+	},
 	programId: {
 		ref: 'program',
 		type: mongoose.Schema.Types.ObjectId

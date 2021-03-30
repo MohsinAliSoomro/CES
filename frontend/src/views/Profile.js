@@ -1,6 +1,6 @@
 
 import React from "react";
-
+import {useHistory} from 'react-router-dom'
 // reactstrap components
 import {
   Button,
@@ -18,6 +18,12 @@ import {
 import UserHeader from "components/Headers/UserHeader.js";
 
 const Profile = () => {
+  const history = useHistory();
+	useEffect(() => {
+		if (localStorage.getItem("user") === null) {
+			history.push('/auth/login')
+		}
+	},[])
   return (
     <>
       <UserHeader />
