@@ -1,25 +1,27 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component} from 'react';
 import './style.scss';
 import data from './data.json';
 import QRCode from 'qrcode.react';
 export class ComponentToPrint extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props);
+		console.log(this.props)
 		this.state={
 			result: []
 		}
 	}
-	componentDidMount(){
-		fetch('http://localhost:4000/marks/marksStudent/603fcad2bd31b833fce8c4e0')
+	
+	componentDidMount() {
+console.log(this.props)
+		fetch('http://localhost:4000/marks/marksStudent/6041241912ad281dace9e4e3')
 			.then((js) => js.json())
 			.then((res) => {
 				this.setState({result:res})
-				// console.log(res)
+				 console.log(res)
 			});
 	}
 	render() {
-		// const [result, setResult] = useState([]);
-console.log(this.state.result)
+console.log("Result",this.props)
 		
 		let totSub = 0;
 		let gp = 0;
@@ -81,27 +83,30 @@ console.log(this.state.result)
 				return 'Fail';
 			}
 		}
-		if (this.state.result.length < -1) {
+		if (!this.state.result) {
 			return <div>Loading....</div>;
 		}
 		return (
+			<div className="container">
 			<div style={{ position: 'relative' }}>
 				<div style={{ position: 'absolute', top: '50%', left: '90%' }}>
 					<h1>Absolute</h1>
 				</div>
 				{/* Term back formula and grading formula */}
 				<div style={{ display: 'flex' }}>
-					<div style={{ border: '1px solid black', marginRight: '100px' }}>
+					<div style={{ border: '1px solid black', marginRight: '70px' }}>
 						<p
 							style={{
 								textAlign: 'center',
 								backgroundColor: '#c7c7c7',
-								border: '1px solid black'
+									border: '1px solid black',
+									fontSize: "11px",
+								fontWeight:"bold"
 							}}
 						>
 							Term back formula
 					</p>
-						<p style={{ padding: '3px' }}>
+						<p style={{ padding: '2px', fontSize: "11px" }}>
 							A student who is fail in four courses in any semester or did not maintain G.P.A. 1.33 in a
 							semester or did not maintain continuity in appearing in tde Examinations but avails semester
 							break he/she shall be placed on term back from tde rolls of tde department.
@@ -232,6 +237,7 @@ console.log(this.state.result)
 					</tbody>
 				</table>
 				<QRCode value={qrcode} />
+			</div>
 			</div>
 		);
 	};

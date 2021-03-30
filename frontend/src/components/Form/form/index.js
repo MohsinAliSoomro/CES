@@ -34,7 +34,11 @@ const FormForm = () => {
 	const dispatch = useDispatch();
 	useEffect(
 		() => {
-			dispatch(fetchAllPrograms());
+			let mount = true;
+			if (mount) {
+				dispatch(fetchAllPrograms());
+			}
+			return () => (mount = false);
 		},
 		[ dispatch ]
 	);
@@ -70,7 +74,7 @@ const FormForm = () => {
 	const handleSubjects = (value) => {
 		setSelectedSubject(value);
 	};
-
+	console.log('subject', subject);
 	return (
 		<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
 			<Form.Item
@@ -83,17 +87,14 @@ const FormForm = () => {
 				]}
 			>
 				<Select placeholder="Select the program" onChange={handleProgram} allowClear>
-					{program.length === 0 ? (
-						'Loading'
-					) : (
+					{program.length > 0 &&
 						program[0].map((s) => {
 							return (
 								<Option key={s._id} value={s._id}>
 									{s.name}
 								</Option>
 							);
-						})
-					)}
+						})}
 				</Select>
 			</Form.Item>
 			<Form.Item
@@ -106,17 +107,14 @@ const FormForm = () => {
 				]}
 			>
 				<Select placeholder="Select the Semester" onChange={handleSemester} allowClear>
-					{semester.length === 0 ? (
-						'Loading'
-					) : (
+					{semester.length > 0 &&
 						semester[0].map((sm) => {
 							return (
 								<Option key={sm._id} value={sm._id}>
 									{sm.name}
 								</Option>
 							);
-						})
-					)}
+						})}
 				</Select>
 			</Form.Item>
 
@@ -137,14 +135,13 @@ const FormForm = () => {
 					placeholder="Select the program"
 					allowClear
 				>
-					{subject.length > 0 &&
-						subject[0].map((s) => {
-							return (
-								<Option key={s._id} value={s._id}>
-									{s.name}
-								</Option>
-							);
-						})}
+					{
+						subject.length > 0 && subject[0].length > 0 &&
+						subject[0].map((s) => (
+							<Option key={s._id} value={s._id}>
+								{s.name}
+							</Option>
+						))}
 				</Select>
 			</Form.Item>
 
@@ -158,17 +155,14 @@ const FormForm = () => {
 				]}
 			>
 				<Select placeholder="Select the Student" allowClear>
-					{student.length === 0 ? (
-						'Loading'
-					) : (
+					{student.length > 0 && student[0].length > 0 &&
 						student[0].map((std) => {
 							return (
 								<Option key={std._id} value={std._id}>
 									{std.firstName} {std.lastName}
 								</Option>
 							);
-						})
-					)}
+						})}
 				</Select>
 			</Form.Item>
 			<Form.Item

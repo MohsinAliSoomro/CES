@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DepartmentForm from '../components/Form/dep';
 import styles from './Program.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPrograms } from './programSlice';
-
+import { fetchAllDepartment } from '../components/Form/dep/departmentSlice';
+import { UpdateProgram, deleteProgram } from '../functions/program';
 import {
 	Badge,
 	Card,
+	Col,
+	Button,
 	CardHeader,
 	CardFooter,
 	DropdownMenu,
@@ -18,21 +21,90 @@ import {
 	Container,
 	Row
 } from 'reactstrap';
-import { ToastProvider } from 'react-toast-notifications';
+import { Modal, Form, Input, Select } from 'antd';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 // core components
 import Header from 'components/Headers/Header.js';
 import ProgramForm from 'components/Form/program';
-
+const layout = {
+	labelCol: {
+		span: 24
+	},
+	wrapperCol: {
+		span: 24
+	}
+};
+const tailLayout = {
+	wrapperCol: {
+		offset: 8,
+		span: 16
+	}
+};
+const { Option } = Select;
 const Program = () => {
 	const dispatch = useDispatch();
+	const [ isModalVisible, setIsModalVisible ] = useState(false);
 	const program = useSelector((state) => state.program.programs);
+	const { addToast } = useToasts();
+	const departments = useSelector((state) => state.department.departments);
 
+	const [ editValue, setEditValue ] = useState();
+
+	const showModal = (val) => {
+		setEditValue(val);
+		setIsModalVisible(true);
+	};
+
+	const handleOk = () => {
+		setIsModalVisible(false);
+	};
+
+	const handleCancel = () => {
+		setIsModalVisible(false);
+	};
 	useEffect(
 		() => {
-			dispatch(fetchAllPrograms());
+			let mount = true;
+			if (mount) {
+				dispatch(fetchAllPrograms());
+				dispatch(fetchAllDepartment());
+			}
+			return () => (mount = false);
 		},
 		[ dispatch ]
 	);
+	const onFinish = (values) => {
+		UpdateProgram(editValue._id, { name: values.Program, department: values.Department })
+			.then((res) => {
+				addToast(`${values.Program} Update successfully...`, {
+					appearance: 'success',
+					autoDismiss: true
+				});
+				dispatch(fetchAllPrograms());
+			})
+			.catch((err) => {
+				addToast(`Something Errors check connecting`, {
+					appearance: 'error',
+					autoDismiss: true
+				});
+			});
+	};
+	const dProgram = (values) => {
+		deleteProgram(values)
+			.then((res) => {
+				addToast(` delete successfully...`, {
+					appearance: 'success',
+					autoDismiss: true
+				});
+				dispatch(fetchAllPrograms());
+			})
+			.catch((err) => {
+				addToast(`Something Errors check connecting`, {
+					appearance: 'error',
+					autoDismiss: true
+				});
+			});
+	};
 	return (
 		<React.Fragment>
 			<Header />
@@ -69,16 +141,14 @@ const Program = () => {
 									<tr>
 										<th scope="col">Program</th>
 										<th scope="col">Department</th>
-										<th scope="col">Status</th>
-										<th scope="col">Users</th>
+
 										<th scope="col">Options</th>
 										<th scope="col" />
 									</tr>
 								</thead>
 								<tbody>
-									{program.length === 0 ? (
-										<div>Loading....</div>
-									) : (
+									{program &&
+										program.length > 0 &&
 										program[0].map((pro) => {
 											return (
 												<tr key={pro._id}>
@@ -103,13 +173,13 @@ const Program = () => {
 														</Media>
 													</th>
 													<td>{pro.department.name}</td>
-													<td>
+													{/* <td>
 														<Badge color="" className="badge-dot mr-4">
 															<i className={'bg-success'} />
 															active
 														</Badge>
 													</td>
-													<td>121</td>
+													<td>121</td> */}
 													<td className="text-right">
 														<UncontrolledDropdown>
 															<DropdownToggle
@@ -123,31 +193,18 @@ const Program = () => {
 																<i className="fas fa-ellipsis-v" />
 															</DropdownToggle>
 															<DropdownMenu className="dropdown-menu-arrow" right>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Action
+																<DropdownItem onClick={() => showModal(pro)}>
+																	Edit
 																</DropdownItem>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Another action
-																</DropdownItem>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Something else here
+																<DropdownItem onClick={() => dProgram(pro._id)}>
+																	Delete
 																</DropdownItem>
 															</DropdownMenu>
 														</UncontrolledDropdown>
 													</td>
 												</tr>
 											);
-										})
-									)}
+										})}
 								</tbody>
 							</Table>
 							<CardFooter className="py-4">
@@ -158,6 +215,56 @@ const Program = () => {
 				</Row>
 				{/* Dark table */}
 			</Container>
+			<ToastProvider>
+				<Modal title="Update Program" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+					<Form {...layout} style={{ padding: '10px 20px' }} name="basic" onFinish={onFinish}>
+						<Form.Item
+							label="Program"
+							name="Program"
+							initialValue={editValue && editValue.name}
+							rules={[
+								{
+									required: true,
+									message: 'Please input your Program!'
+								}
+							]}
+						>
+							<Input defaultValue={editValue && editValue.name} />
+						</Form.Item>
+						<Form.Item
+							label="Department"
+							name="Department"
+							initialValue={editValue && editValue.department.name}
+							rules={[
+								{
+									required: true
+								}
+							]}
+						>
+							<Select placeholder="Select the department" allowClear>
+								{departments.length === 0 ? (
+									'Loading'
+								) : (
+									departments[0].map((d) => {
+										return (
+											<Option key={d._id} value={d._id}>
+												{d.name}
+											</Option>
+										);
+									})
+								)}
+							</Select>
+						</Form.Item>
+						<Form.Item {...tailLayout}>
+							<Col className="text-right" xs="4">
+								<Button color="primary" size="md">
+									Update
+								</Button>
+							</Col>
+						</Form.Item>
+					</Form>
+				</Modal>
+			</ToastProvider>
 		</React.Fragment>
 	);
 };

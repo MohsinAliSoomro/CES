@@ -1,9 +1,10 @@
-const  router  = require('express').Router();
+const router = require('express').Router();
 
-const {pro} = require('../controllers/programs/index.js')
+const { pro } = require('../controllers/programs/index.js');
 
+router.post('/create', pro.CreateProgram);
+router.get('/programs', pro.ListProgram);
+router.put('/programUpdate/:id', pro.UpdateProgram);
+router.delete('/programDelete/:id', pro.deleteProgram);
 
-router.post('/create', pro.CreateProgram)
-router.get('/programs', pro.ListProgram)
-
-module.exports = router;    
+module.exports = router;

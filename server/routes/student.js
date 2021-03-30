@@ -6,5 +6,5 @@ router.get('/students', student.students);
 router.get('/studentprogram/:id', student.studentProgram);
 router.get('/student/:id', student.student);
 router.delete('/student/:id', student.studentDelete);
-router.post('/student/:id', student.studentUpdate);
+router.put('/student/:id', student.studentUpdate);
 module.exports = router;

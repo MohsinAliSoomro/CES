@@ -37,11 +37,13 @@ const ProgramForm = () => {
 	const onFinish = (values) => {
 		CreateProgram({ name: values.Program, department: values.Department })
 			.then((res) => {
-				dispatch(fetchAllPrograms());
 				addToast(`${values.Program} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true
 				});
+				values.Program = "";
+				values.Department = "";
+				dispatch(fetchAllPrograms());
 			})
 			.catch((err) => {
 				addToast(`Something Errors check connecting`, {

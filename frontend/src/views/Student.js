@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import StudentForm from '../components/Form/student';
 import styles from './Program.module.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllStudent } from './studentSlice';
+import { ListStudent, DeleteStudent, UpdateStudent } from '../functions/student';
 // reactstrap components
-
+import { ListProgram } from '../functions/program';
 import {
 	Card,
 	CardHeader,
@@ -19,20 +20,95 @@ import {
 	Container,
 	Row
 } from 'reactstrap';
-import { ToastProvider } from 'react-toast-notifications';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 // core components
 import Header from 'components/Headers/Header.js';
-
+import { Modal } from 'antd';
 const Student = () => {
 	const dispatch = useDispatch();
-	const students = useSelector((state) => state.student.students);
-	console.log(students)
+	const { addToast } = useToasts();
+	const [ isModalVisible, setIsModalVisible ] = useState(false);
+	const [ students, setStudents ] = useState();
+	const [ editValue, setEditValue ] = useState();
+	const [ program, setProgram ] = useState();
+	console.log('Students', students);
 	useEffect(
 		() => {
-			dispatch(fetchAllStudent());
+			ListStudent().then((res) => {
+				setStudents(res.data);
+			});
 		},
 		[ dispatch ]
 	);
+	const showModal = (val) => {
+		// setEditValue(val);
+		console.log(val);
+		setEditValue(val);
+		ListProgram()
+			.then((res) => {
+				console.log(res.data);
+				setProgram(res.data);
+			})
+			.catch((er) => console.log(er));
+		setIsModalVisible(true);
+	};
+
+	const handleOk = () => {
+		setIsModalVisible(false);
+	};
+
+	const handleCancel = () => {
+		setIsModalVisible(false);
+	};
+	console.log(editValue);
+	const handleDelete = (id) => {
+		DeleteStudent(id)
+			.then((res) => {
+				addToast(` delete successfully...`, {
+					appearance: 'success',
+					autoDismiss: true
+				});
+				ListStudent().then((res) => {
+					setStudents(res.data);
+				});
+			})
+			.catch((er) => {
+				addToast(` Delete fail`, {
+					appearance: 'error',
+					autoDismiss: true
+				});
+			});
+	};
+	const handleSubmitUpdate = (e) => {
+e.preventDefault()
+		UpdateStudent(editValue._id, {
+			firstName: editValue.firstName,
+			lastName: editValue.lastName,
+			fatherName: editValue.fatherName,
+			religion: editValue.religion,
+			surname: editValue.surname,
+			nationality: editValue.nationality,
+			address: editValue.address,
+			district: editValue.district,
+			programId: editValue.programId,
+			rollno: editValue.rollno
+		}).then(res => {
+			addToast(` update successfully...`, {
+				appearance: 'success',
+				autoDismiss: true
+			});
+			ListStudent().then((res) => {
+				setStudents(res.data);
+			});
+		}).catch(er => {
+			addToast(` Update fail...`, {
+				appearance: 'error',
+				autoDismiss: true
+			});
+			
+		})
+	};
+	console.log(editValue)
 	return (
 		<React.Fragment>
 			<Header />
@@ -45,7 +121,7 @@ const Student = () => {
 						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
 							<h2 className={styles.formHeading}>Student</h2>
 							<ToastProvider>
-								<StudentForm />
+								<StudentForm setStudents={setStudents} />
 							</ToastProvider>
 						</div>
 					</div>
@@ -75,10 +151,8 @@ const Student = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{/* {students.length === 0 ? (
-										<div>Load	ing...</div>
-									) : (
-										students[0].map((pro) => {
+									{students &&
+										students.map((pro) => {
 											return (
 												<tr key={pro._id}>
 													<th scope="row">
@@ -98,7 +172,7 @@ const Student = () => {
 															</a>
 															<Media>
 																<span className="mb-0 text-sm">
-																	{pro.programId.name ? pro.programId.name : ' '}
+																	{pro.programId && pro.programId.name}
 																</span>
 															</Media>
 														</Media>
@@ -125,31 +199,18 @@ const Student = () => {
 																<i className="fas fa-ellipsis-v" />
 															</DropdownToggle>
 															<DropdownMenu className="dropdown-menu-arrow" right>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Action
+																<DropdownItem onClick={() => showModal(pro)}>
+																	Edit
 																</DropdownItem>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Another action
-																</DropdownItem>
-																<DropdownItem
-																	href="#pablo"
-																	onClick={(e) => e.preventDefault()}
-																>
-																	Something else here
+																<DropdownItem onClick={() => handleDelete(pro._id)}>
+																	Delete
 																</DropdownItem>
 															</DropdownMenu>
 														</UncontrolledDropdown>
 													</td>
 												</tr>
 											);
-										})
-									)} */}
+										})}
 								</tbody>
 							</Table>
 							<CardFooter className="py-4">
@@ -160,6 +221,104 @@ const Student = () => {
 				</Row>
 				{/* Dark table */}
 			</Container>
+			<Modal title="Update Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+				<form onSubmit={handleSubmitUpdate}>
+					<label>Program</label>
+					<select defaultValue={editValue && editValue.programId.name} onChange={(e)=>setEditValue({ ...editValue, programId: e.target.value })}>
+						{program &&
+							program.map((p) => {
+								return (
+									<option selected={editValue && editValue.programId.name} key={p._id} value={p._id}>
+										{p.name}
+									</option>
+								);
+							})}
+					</select>
+					<label>
+						{' '}
+						Roll No
+						<input
+							value={editValue && editValue.rollno}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, rollno: e.target.value })}
+						/>
+					</label>
+					<label>
+						{' '}
+						First Name
+						<input
+							value={editValue && editValue.firstName}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, firstName: e.target.value })}
+						/>
+					</label>
+					<label>
+						{' '}
+						Last Name
+						<input
+							value={editValue && editValue.lastName}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, lastName: e.target.value })}
+						/>
+					</label>
+					<label>
+						{' '}
+						Father Name
+						<input
+							value={editValue && editValue.fatherName}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, fatherName: e.target.value })}
+						/>
+					</label>
+
+					<label>
+						{' '}
+						Surname
+						<input
+							value={editValue && editValue.surname}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, surname: e.target.value })}
+						/>
+					</label>
+					<label>
+						{' '}
+						Religion
+						<input
+							value={editValue && editValue.religion}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, religion: e.target.value })}
+						/>
+					</label>
+					<label>
+						{' '}
+						Nationality
+						<input
+							value={editValue && editValue.nationality}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, nationality: e.target.value })}
+						/>
+					</label>
+					<label>
+						{' '}
+						Address
+						<input
+							value={editValue && editValue.address}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, address: e.target.value })}
+						/>
+					</label>
+					<label>
+						{' '}
+						District
+						<input
+							value={editValue && editValue.district}
+							placeholder="first Name"
+							onChange={(e) => setEditValue({ ...editValue, district: e.target.value })}
+						/>
+					</label>
+					<button>Update</button>
+				</form>
+			</Modal>
 		</React.Fragment>
 	);
 };

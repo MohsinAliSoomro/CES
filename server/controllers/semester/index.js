@@ -13,38 +13,61 @@ exports.semester = {
 					}
 				}
 			);
-		} catch (error) {}
+			res.send(semester)
+		} catch (error) {
+			res.send({ message: 'something wrong create semester' });
+		}
 	},
 	semesters: async (req, res) => {
-		const semester = await Semester.find({}).populate('programId');
-		res.send(semester);
+		try {
+			const semester = await Semester.find({}).populate('programId');
+			res.send(semester);
+		} catch (error) {
+			res.send({ message: 'something wrong get semesters' });
+		}
 	},
 	semester: async (req, res) => {
-		const semester = await Semester.find({ _id: req.params.id }).populate('programId');
-		res.send(semester);
+		try {
+			const semester = await Semester.find({ _id: req.params.id }).populate('programId');
+			res.send(semester);
+		} catch (error) {
+			res.send({ message: 'something wrong get semester' });
+		}
 	},
 	semesterProgram: async (req, res) => {
-		const semester = await Semester.find({ programId: req.params.id });
-		res.send(semester);
+		try {
+			const semester = await Semester.find({ programId: req.params.id });
+			res.send(semester);
+		} catch (error) {
+			res.send({ message: 'something wrong get semester program' });
+		}
 	},
 	semesterDelete: async (req, res) => {
-		const semester = await Semester.findOneAndDelete({ _id: req.params.id });
-		res.send(semester);
+		try {
+			const semester = await Semester.findOneAndDelete({ _id: req.params.id });
+			res.send(semester);
+		} catch (error) {
+			res.send({ message: 'something wrong get delete semester' });
+		}
 	},
 	semesterUpdate: async (req, res) => {
-		const semester = await Semester.findOne({ _id: req.params.id });
-		if (semester) {
-			const sms = await Semester.findByIdAndUpdate(
-				{ _id: req.params.id },
-				{
-					$set: {
-						name: req.body.name,
-						programId: req.body.programId
+		try {
+			const semester = await Semester.findOne({ _id: req.params.id });
+			if (semester) {
+				const sms = await Semester.findByIdAndUpdate(
+					{ _id: req.params.id },
+					{
+						$set: {
+							name: req.body.name,
+							programId: req.body.programId
+						}
 					}
-				}
-			);
-			res.send(sms);
-		} else {
+				);
+				res.send(sms);
+			} else {
+				res.json({ message: 'Error to update student' });
+			}
+		} catch (error) {
 			res.json({ message: 'Error to update student' });
 		}
 	}

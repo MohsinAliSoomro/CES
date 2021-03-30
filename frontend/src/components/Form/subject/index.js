@@ -127,7 +127,7 @@ const SubjectForm = () => {
 					}
 				]}
 			>
-				<Select placeholder="Select the Type" onChange={selectProgram} allowClear>
+				<Select placeholder="Select the Type"  allowClear>
 					<Option value="Theory">Theory</Option>
 					<Option value="Practical">Practical</Option>
 				</Select>

@@ -58,7 +58,8 @@ exports.student = {
 							nationality: req.body.nationality,
 							address: req.body.address,
 							district: req.body.district,
-							programId: req.body.programId
+							programId: req.body.programId,
+							rollno:req.body.rollno
 						}
 					}
 				);

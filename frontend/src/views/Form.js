@@ -25,13 +25,14 @@ import FormForm from 'components/Form/form';
 const Form = () => {
 	const dispatch = useDispatch();
 	const subject = useSelector((state) => state.subject.subjects);
-console.log("Subject=>",subject)
+	console.log('Subject=>', subject);
 	useEffect(
 		() => {
 			dispatch(fetchAllSubject());
 		},
 		[ dispatch ]
 	);
+	console.log(subject)
 	return (
 		<React.Fragment>
 			<Header />
@@ -49,10 +50,7 @@ console.log("Subject=>",subject)
 						</div>
 					</div>
 					<div className="col-sm-12 col-lg-6 col-md-6 mb-3">
-						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }}>
-							
-							
-						</div>
+						<div className=" shadow" style={{ backgroundColor: 'white', borderRadius: '6px' }} />
 					</div>
 				</div>
 				<Row>
@@ -73,9 +71,7 @@ console.log("Subject=>",subject)
 									</tr>
 								</thead>
 								<tbody>
-									{subject.length === 0 ? (
-										<div>Loading....</div>
-									) : (
+									{subject.length > 0 && subject[0].length > 0 &&
 										subject[0].map((pro) => {
 											return (
 												<tr key={pro._id}>
@@ -99,9 +95,9 @@ console.log("Subject=>",subject)
 															</Media>
 														</Media>
 													</th>
-                                                    <td>{pro.type}</td>
-                                                    <td>{pro.creditHour}</td>
-                                                    <td>{pro.semesterId.name}</td>
+													<td>{pro.type}</td>
+													<td>{pro.creditHour}</td>
+													<td>{pro.semesterId.name}</td>
 													<td>
 														<Badge color="" className="badge-dot mr-4">
 															<i className={'bg-success'} />
@@ -145,8 +141,7 @@ console.log("Subject=>",subject)
 													</td>
 												</tr>
 											);
-										})
-									)}
+										})}
 								</tbody>
 							</Table>
 							<CardFooter className="py-4">

@@ -11,13 +11,14 @@ const studentSlice = createSlice({
 	initialState: {
 		loading: true,
 		error: null,
-		students: []
+		students: [],
+		list: []
 	},
 	reducers: {},
 	extraReducers: {
 		[fetchAllStudent.pending]: (state) => {
-            state.loading = true;
-            state.error = null;
+			state.loading = true;
+			state.error = null;
 			state.students.length = 0;
 		},
 		[fetchAllStudent.fulfilled]: (state, action) => {
@@ -27,8 +28,8 @@ const studentSlice = createSlice({
 		},
 		[fetchAllStudent.rejected]: (state) => {
 			state.loading = false;
-            state.error = 'The error in fetching student';
-            state.students.length = 0;
+			state.error = 'The error in fetching student';
+			state.students.length = 0;
 		}
 	}
 });

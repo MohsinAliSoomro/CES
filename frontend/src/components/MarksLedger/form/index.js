@@ -141,7 +141,7 @@ const FormForm = ({ setStudent, setSubject, type,setProgram ,setSemester}) => {
 					allowClear
 					onChange={handleSubject}
 				>
-					{subject.length > 0 &&
+					{subject.length > 0 && subject[0].length > 0 &&
 						subject[0].map((s) => {
 							return (
 								<Option key={s._id} value={s._id}>

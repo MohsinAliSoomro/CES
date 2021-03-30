@@ -28,19 +28,21 @@ const Semester = () => {
 	}, []);
 	const { addToast } = useToasts();
 	const onFinish = (values) => {
-		console.log('Success:', values);
-		CreateSemester({ name: values.Semester,programId:values.Program }	)
+		CreateSemester({ name: values.Semester, programId: values.Program })
 			.then((res) => {
 				addToast(`${values.Semester} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true
 				});
+				
+				console.log('Success:', res);
 			})
 			.catch((err) => {
 				addToast(`Something Errors check connecting`, {
 					appearance: 'error',
 					autoDismiss: true
 				});
+				console.log(err);
 			});
 	};
 

@@ -8,7 +8,9 @@ import { ListProgram } from '../../../functions/program';
 import { CreateStudent } from 'functions/student';
 import { fetchAllStudent } from '../../../views/studentSlice';
 import { useDispatch } from 'react-redux';
+import {ListStudent} from '../../../functions/student'
 const { Option } = Select;
+
 
 const layout = {
 	labelCol: {
@@ -25,7 +27,7 @@ const tailLayout = {
 	}
 };
 
-const SubjectForm = () => {
+const SubjectForm = ({setStudents}) => {
 	const dispatch = useDispatch();
 	const [ program, setProgram ] = useState([]);
 	// const [semester, setSemester] = useState([]);
@@ -55,10 +57,13 @@ const SubjectForm = () => {
 			district: values.district
 		})
 			.then((res) => {
-				dispatch(fetchAllStudent());
+				// dispatch(fetchAllStudent());
 				addToast(`${values.Subject} Added successfully...`, {
 					appearance: 'success',
 					autoDismiss: true
+				});
+				ListStudent().then((res) => {
+					setStudents(res.data);
 				});
 			})
 			.catch((err) => {

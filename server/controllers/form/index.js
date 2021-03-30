@@ -2,12 +2,35 @@ const Form = require('../../models/form');
 
 exports.form = {
 	CreateForm: async function(req, res) {
-		const newForm = await Form(req.body);
-		await newForm.save();
-		res.send(newForm);
+		try {
+			const newForm = await Form(req.body);
+			await newForm.save();
+			res.send(newForm);
+		} catch (error) {
+			res.send({ message: 'something wrong create form' });
+		}
 	},
 	ListForm: async function(req, res) {
 		try {
+			// const listForm = await Form.aggregate([
+			// 	{
+			// 		$unwind:"$subjectId"
+			// 	},
+			// 	{
+			// 		$match: {
+			// 			studentId:{studentId:"6041241912ad281dace9e4e3"}
+			// 		}
+			// 	},
+			// 	{
+			// 		$lookup: {
+			// 			from: "students",
+			// 			localField: "id",
+			// 			foreignField: "studentId",
+			// 			as:"students"
+			// 		}
+			// 	}
+
+			// ])
 			const listForm = await Form.find({})
 				.populate('programId')
 				.populate('subjectId')
