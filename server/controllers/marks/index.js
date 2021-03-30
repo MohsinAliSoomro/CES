@@ -20,7 +20,12 @@ exports.marks = {
 	},
 	ListMarks: async function(req, res) {
 		try {
-			const listMarks = await Marks.find({}).populate('formId').populate('subjectId');
+			const listMarks = await await Marks.find({})
+				.populate('formId')
+				.populate('subjectId')
+				.populate('studentId')
+				.populate('programId')
+				.populate('semesterId');
 			res.send(listMarks);
 		} catch (error) {
 			res.json({ message: 'Something error in list of marks' });
