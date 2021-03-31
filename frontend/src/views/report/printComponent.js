@@ -22,13 +22,12 @@ function PrintComponent() {
 	// const handlePrint = useReactToPrint({ content: () => componentRef.current });
 	return (
 		<div>
-			<div style={{ marginTop: '20px' }}>
+			<div style={{ paddingTop: '50px' }}>
 				<div>
 					{student &&
 						student.map((std) => {
 							return (
 								<div key={std._id}>
-									<h2>{std.studentId.firstName}</h2>
 									<div style={{ marginTop: '200px' }}>
 										<ReactToPrint
                                             trigger={() => <button>Print This Out</button>}

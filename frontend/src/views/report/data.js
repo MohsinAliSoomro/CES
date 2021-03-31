@@ -113,9 +113,8 @@ export default class ComponentToPrint extends Component {
 		// }
 	
 		return (
-			<div className={styles.container}>
+			<div className={styles.reportContainer} style={{paddingTop:"350px",paddingBottom:"200px",paddingLeft:"100px",paddingRight:"100px"}}>
 				
-			<div style={{ position: 'relative' }}>
 		
 				{/* Term back formula and grading formula */}
 				<div style={{ display: 'flex' }}>
@@ -175,6 +174,7 @@ export default class ComponentToPrint extends Component {
 				</div>
 				{/* Heading of department and name*/}
 				<div>
+					<h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"30px"}}> Program : {[...new Set(filterData.map(i=>i.programId.name))]}</h1>					
 					<h1
 						style={{
 							textAlign: 'center',
@@ -184,16 +184,12 @@ export default class ComponentToPrint extends Component {
 						>
 				</h1>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						<p>Department of </p>
 						<p>Session 2021</p>
 					</div>
 					{/* Name  */}
 						<p>
 							{/* {filterData && filterData[0].studentId.firstName} */}
-							<span>Mr./ Miss.</span>
-							<pre>
-							{[...new Set(filterData.map(i=>i.studentId.firstName))]} {[...new Set(filterData.map(i=>i.studentId.lastName))]}
-							</pre>
+							<span>Mr./ Miss.</span>	<pre>{[...new Set(filterData.map(i=>i.studentId.firstName))]} {[...new Set(filterData.map(i=>i.studentId.lastName))]} S/O {[...new Set(filterData.map(i=>i.studentId.fatherName))]} ( {[...new Set(filterData.map(i=>i.studentId.rollno))]}) </pre>
 							
 							
 					</p>
@@ -202,7 +198,7 @@ export default class ComponentToPrint extends Component {
 					<tbody>
 						<tr>
 							<td>
-								{this.props.data.semesterId.name} semester {this.props.data.createdAt.slice(0,4)} {this.props.data.formId.type}
+								{this.props.data.semesterId.name} Semester {this.props.data.createdAt.slice(0,4)} {this.props.data.formId.type}
 							</td>
 							<td rowSpan={2}>Credit hours</td>
                 <td rowSpan={2}> Obt :</td>
@@ -261,7 +257,7 @@ export default class ComponentToPrint extends Component {
 						})} 
 						              <tr>
                 <td>
-                  <p className="h-2 text-right">                  <b>Total Marks</b></p>
+                  <p className="h-2 text-right">         <b>Total Marks</b></p>
                 </td>
                 <td>
                   <p className="h-2"> {credithr}</p>
@@ -290,7 +286,6 @@ export default class ComponentToPrint extends Component {
 					</tbody>
 				</table>
 				{/* <QRCode value={qrcode} /> */}
-			</div>
 			</div>
 		);
 	};
