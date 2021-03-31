@@ -212,7 +212,7 @@ export default class ComponentToPrint extends Component {
 						{filterData.map((sb) => {
 							return (
 								<tr> 
-									 <td>{sb.subjectId.name}</td>
+									 <td>{sb.subjectId.name} ({(sb.subjectId.type)})</td>
 									<td>{sb.subjectId.creditHour}</td>
 									<td>{sb.marks[0]}</td> 
 									 <td>
