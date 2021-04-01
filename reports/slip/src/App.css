@@ -1,0 +1,59 @@
+*{
+  margin:0px;
+padding:0px;
+font-family: 'Open Sans', sans-serif;
+}
+.slip-container{
+  position: fixed;
+  height:375px;
+  width:705px;
+border:2px solid black;
+}
+.slip-logo{
+  padding:15px;
+}
+.unitext{
+  position: absolute;
+  top:38px;
+  left:130px;
+  font-size: 18px;
+text-transform: uppercase;
+  font-weight: 620;
+  word-spacing: 1px;
+  text-align: center;
+}
+.examwing{
+    position: absolute;
+    top:60px;
+    left:247px;
+    word-spacing: 1px;
+    text-align: center;
+  }
+  .details{
+    padding:30px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .subjects-table{
+position: absolute;
+top:145px;
+left:250px;
+border:1.px solid black;
+  }
+  .subjects-table td,th {
+    border:1px solid black;
+    padding:3px;
+    font-size: 11px;
+    width:220px;
+  }
+  th{
+    text-align: left;
+    margin-top:10px;
+    background-color: black;
+    color:white;
+  }
+  .crhr{
+    width: 50px !important;
+    text-align: center;
+  }
